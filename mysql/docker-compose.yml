@@ -1,0 +1,72 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: shopping-cart-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: shopping_cart_db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: MySecurePass123!
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./src/db/setup.sql:/docker-entrypoint-initdb.d/setup.sql
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-h",
+          "localhost",
+          "-u",
+          "admin",
+          "-pMySecurePass123!",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - shopping-cart-network
+
+  api:
+    build:
+      context: ./src
+      dockerfile: Dockerfile
+    container_name: shopping-cart-api
+    environment:
+      DB_HOST: mysql
+      DB_USER: admin
+      DB_PASSWORD: MySecurePass123!
+      DB_NAME: shopping_cart_db
+      PORT: 3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - shopping-cart-network
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--no-verbose",
+          "--tries=1",
+          "--spider",
+          "http://localhost:3000/health",
+        ]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+
+volumes:
+  mysql_data:
+
+networks:
+  shopping-cart-network:
+    driver: bridge

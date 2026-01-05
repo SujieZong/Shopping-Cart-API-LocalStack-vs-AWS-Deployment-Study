@@ -1,0 +1,453 @@
+{
+  "info": {
+    "name": "Shopping Cart API - Consistency Test",
+    "description": "Consistency test collection: 50 create, 50 add items, 50 get operations with detailed logging",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://homework7-alb-817652543.us-west-2.elb.amazonaws.com",
+      "type": "string"
+    },
+    {
+      "key": "test_results",
+      "value": "[]",
+      "type": "string"
+    },
+    {
+      "key": "created_cart_ids",
+      "value": "[]",
+      "type": "string"
+    },
+    {
+      "key": "iteration_count",
+      "value": "0",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Setup - Clear Test Results",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Initialize test results array",
+              "pm.collectionVariables.set('test_results', JSON.stringify([]));",
+              "pm.collectionVariables.set('created_cart_ids', JSON.stringify([]));",
+              "pm.collectionVariables.set('iteration_count', '0');",
+              "",
+              "console.log('='.repeat(80));",
+              "console.log('CONSISTENCY TEST STARTED');",
+              "console.log('Target: 50 create_cart + 50 add_items + 50 get_cart operations');",
+              "console.log('='.repeat(80));",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/health",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "health"
+          ]
+        },
+        "description": "Initialize test - clears previous results"
+      },
+      "response": []
+    },
+    {
+      "name": "1. Create Cart (Run 50x)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Get current iteration",
+              "let iteration = parseInt(pm.collectionVariables.get('iteration_count') || '0') + 1;",
+              "pm.collectionVariables.set('iteration_count', iteration.toString());",
+              "",
+              "// Capture test result",
+              "const result = {",
+              "    operation: 'create_cart',",
+              "    response_time: pm.response.responseTime,",
+              "    success: pm.response.code === 201,",
+              "    status_code: pm.response.code,",
+              "    timestamp: new Date().toISOString(),",
+              "    iteration: iteration",
+              "};",
+              "",
+              "// Save cart ID if successful",
+              "if (pm.response.code === 201) {",
+              "    try {",
+              "        const jsonData = pm.response.json();",
+              "        result.shopping_cart_id = jsonData.shopping_cart_id;",
+              "        ",
+              "        // Store cart ID for later use",
+              "        let cartIds = JSON.parse(pm.collectionVariables.get('created_cart_ids') || '[]');",
+              "        cartIds.push(jsonData.shopping_cart_id);",
+              "        pm.collectionVariables.set('created_cart_ids', JSON.stringify(cartIds));",
+              "    } catch (e) {",
+              "        result.error = 'Failed to parse response: ' + e.message;",
+              "        result.success = false;",
+              "    }",
+              "} else {",
+              "    result.error = pm.response.text();",
+              "}",
+              "",
+              "// Append to results",
+              "let results = JSON.parse(pm.collectionVariables.get('test_results') || '[]');",
+              "results.push(result);",
+              "pm.collectionVariables.set('test_results', JSON.stringify(results));",
+              "",
+              "// Log the result",
+              "console.log(JSON.stringify(result, null, 2));",
+              "",
+              "// Test assertions",
+              "pm.test(`[${iteration}] Create cart - Status 201`, function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "",
+              "pm.test(`[${iteration}] Create cart - Response has shopping_cart_id`, function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property('shopping_cart_id');",
+              "    pm.expect(jsonData.shopping_cart_id).to.be.a('number');",
+              "});",
+              "",
+              "pm.test(`[${iteration}] Create cart - Response time < 200ms`, function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(200);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"customer_id\": {{$randomInt}}\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/shopping-carts",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "shopping-carts"
+          ]
+        },
+        "description": "Create a new shopping cart - Run this 50 times using Collection Runner"
+      },
+      "response": []
+    },
+    {
+      "name": "2. Add Item to Cart (Run 50x)",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "// Get a random cart ID from created carts",
+              "let cartIds = JSON.parse(pm.collectionVariables.get('created_cart_ids') || '[]');",
+              "",
+              "if (cartIds.length === 0) {",
+              "    console.error('ERROR: No carts available. Run Create Cart operations first!');",
+              "    throw new Error('No carts available for adding items');",
+              "}",
+              "",
+              "// Select a random cart ID",
+              "const randomCartId = cartIds[Math.floor(Math.random() * cartIds.length)];",
+              "pm.collectionVariables.set('current_cart_id', randomCartId);",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Get current iteration",
+              "let iteration = parseInt(pm.collectionVariables.get('iteration_count') || '0') + 1;",
+              "pm.collectionVariables.set('iteration_count', iteration.toString());",
+              "",
+              "const cartId = pm.collectionVariables.get('current_cart_id');",
+              "",
+              "// Capture test result",
+              "const result = {",
+              "    operation: 'add_items',",
+              "    response_time: pm.response.responseTime,",
+              "    success: pm.response.code === 204,",
+              "    status_code: pm.response.code,",
+              "    timestamp: new Date().toISOString(),",
+              "    iteration: iteration,",
+              "    shopping_cart_id: parseInt(cartId)",
+              "};",
+              "",
+              "if (pm.response.code !== 204) {",
+              "    result.error = pm.response.text();",
+              "}",
+              "",
+              "// Append to results",
+              "let results = JSON.parse(pm.collectionVariables.get('test_results') || '[]');",
+              "results.push(result);",
+              "pm.collectionVariables.set('test_results', JSON.stringify(results));",
+              "",
+              "// Log the result",
+              "console.log(JSON.stringify(result, null, 2));",
+              "",
+              "// Test assertions",
+              "pm.test(`[${iteration}] Add item - Status 204`, function () {",
+              "    pm.response.to.have.status(204);",
+              "});",
+              "",
+              "pm.test(`[${iteration}] Add item - Response time < 200ms`, function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(200);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"product_id\": {{$randomInt}},\n  \"quantity\": {{$randomInt}}\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/shopping-carts/{{current_cart_id}}/items",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "shopping-carts",
+            "{{current_cart_id}}",
+            "items"
+          ]
+        },
+        "description": "Add item to a random existing cart - Run this 50 times using Collection Runner"
+      },
+      "response": []
+    },
+    {
+      "name": "3. Get Cart (Run 50x)",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "// Get a random cart ID from created carts",
+              "let cartIds = JSON.parse(pm.collectionVariables.get('created_cart_ids') || '[]');",
+              "",
+              "if (cartIds.length === 0) {",
+              "    console.error('ERROR: No carts available. Run Create Cart operations first!');",
+              "    throw new Error('No carts available for retrieval');",
+              "}",
+              "",
+              "// Select a random cart ID",
+              "const randomCartId = cartIds[Math.floor(Math.random() * cartIds.length)];",
+              "pm.collectionVariables.set('current_cart_id', randomCartId);",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Get current iteration",
+              "let iteration = parseInt(pm.collectionVariables.get('iteration_count') || '0') + 1;",
+              "pm.collectionVariables.set('iteration_count', iteration.toString());",
+              "",
+              "const cartId = pm.collectionVariables.get('current_cart_id');",
+              "",
+              "// Capture test result",
+              "const result = {",
+              "    operation: 'get_cart',",
+              "    response_time: pm.response.responseTime,",
+              "    success: pm.response.code === 200,",
+              "    status_code: pm.response.code,",
+              "    timestamp: new Date().toISOString(),",
+              "    iteration: iteration,",
+              "    shopping_cart_id: parseInt(cartId)",
+              "};",
+              "",
+              "// Add cart details if successful",
+              "if (pm.response.code === 200) {",
+              "    try {",
+              "        const jsonData = pm.response.json();",
+              "        result.customer_id = jsonData.customer_id;",
+              "        result.items_count = jsonData.items ? jsonData.items.length : 0;",
+              "    } catch (e) {",
+              "        result.error = 'Failed to parse response: ' + e.message;",
+              "        result.success = false;",
+              "    }",
+              "} else {",
+              "    result.error = pm.response.text();",
+              "}",
+              "",
+              "// Append to results",
+              "let results = JSON.parse(pm.collectionVariables.get('test_results') || '[]');",
+              "results.push(result);",
+              "pm.collectionVariables.set('test_results', JSON.stringify(results));",
+              "",
+              "// Log the result",
+              "console.log(JSON.stringify(result, null, 2));",
+              "",
+              "// Test assertions",
+              "pm.test(`[${iteration}] Get cart - Status 200`, function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(`[${iteration}] Get cart - Has correct structure`, function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property('shopping_cart_id');",
+              "    pm.expect(jsonData).to.have.property('customer_id');",
+              "    pm.expect(jsonData).to.have.property('items');",
+              "});",
+              "",
+              "pm.test(`[${iteration}] Get cart - Response time < 100ms`, function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(100);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/shopping-carts/{{current_cart_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "shopping-carts",
+            "{{current_cart_id}}"
+          ]
+        },
+        "description": "Get a random existing cart - Run this 50 times using Collection Runner"
+      },
+      "response": []
+    },
+    {
+      "name": "Summary - Generate Test Report",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Retrieve all test results",
+              "const results = JSON.parse(pm.collectionVariables.get('test_results') || '[]');",
+              "",
+              "console.log('\\n' + '='.repeat(80));",
+              "console.log('CONSISTENCY TEST SUMMARY');",
+              "console.log('='.repeat(80));",
+              "",
+              "// Group results by operation",
+              "const groupedResults = {",
+              "    create_cart: [],",
+              "    add_items: [],",
+              "    get_cart: []",
+              "};",
+              "",
+              "results.forEach(result => {",
+              "    if (groupedResults[result.operation]) {",
+              "        groupedResults[result.operation].push(result);",
+              "    }",
+              "});",
+              "",
+              "// Calculate statistics for each operation",
+              "Object.keys(groupedResults).forEach(operation => {",
+              "    const opResults = groupedResults[operation];",
+              "    const successCount = opResults.filter(r => r.success).length;",
+              "    const failureCount = opResults.length - successCount;",
+              "    const avgResponseTime = opResults.reduce((sum, r) => sum + r.response_time, 0) / opResults.length || 0;",
+              "    const minResponseTime = Math.min(...opResults.map(r => r.response_time));",
+              "    const maxResponseTime = Math.max(...opResults.map(r => r.response_time));",
+              "    ",
+              "    console.log(`\\n${operation.toUpperCase()}:`);",
+              "    console.log(`  Total Operations: ${opResults.length}`);",
+              "    console.log(`  Successful: ${successCount}`);",
+              "    console.log(`  Failed: ${failureCount}`);",
+              "    console.log(`  Success Rate: ${((successCount / opResults.length) * 100).toFixed(2)}%`);",
+              "    console.log(`  Avg Response Time: ${avgResponseTime.toFixed(2)}ms`);",
+              "    console.log(`  Min Response Time: ${minResponseTime.toFixed(2)}ms`);",
+              "    console.log(`  Max Response Time: ${maxResponseTime.toFixed(2)}ms`);",
+              "});",
+              "",
+              "// Overall statistics",
+              "const totalOps = results.length;",
+              "const totalSuccess = results.filter(r => r.success).length;",
+              "const totalFailures = totalOps - totalSuccess;",
+              "const overallAvgTime = results.reduce((sum, r) => sum + r.response_time, 0) / totalOps || 0;",
+              "",
+              "console.log('\\n' + '-'.repeat(80));",
+              "console.log('OVERALL STATISTICS:');",
+              "console.log(`  Total Operations: ${totalOps}`);",
+              "console.log(`  Total Successful: ${totalSuccess}`);",
+              "console.log(`  Total Failed: ${totalFailures}`);",
+              "console.log(`  Overall Success Rate: ${((totalSuccess / totalOps) * 100).toFixed(2)}%`);",
+              "console.log(`  Overall Avg Response Time: ${overallAvgTime.toFixed(2)}ms`);",
+              "console.log('='.repeat(80));",
+              "",
+              "// Export results as downloadable data",
+              "console.log('\\nFull test results (JSON format):');",
+              "console.log(JSON.stringify(results, null, 2));",
+              "",
+              "// Test assertions for summary",
+              "pm.test('All operations completed', function () {",
+              "    pm.expect(totalOps).to.be.at.least(1);",
+              "});",
+              "",
+              "pm.test('Success rate > 95%', function () {",
+              "    pm.expect((totalSuccess / totalOps) * 100).to.be.above(95);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/health",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "health"
+          ]
+        },
+        "description": "Generate summary report of all test results"
+      },
+      "response": []
+    }
+  ]
+}

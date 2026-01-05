@@ -1,0 +1,363 @@
+{
+  "info": {
+    "name": "Shopping Cart API - DynamoDB",
+    "description": "Test collection for DynamoDB-based shopping cart API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://homework7-alb-443401271.us-west-2.elb.amazonaws.com",
+      "type": "string"
+    },
+    {
+      "key": "shopping_cart_id",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/health",
+          "host": ["{{base_url}}"],
+          "path": ["health"]
+        },
+        "description": "Check if the API is running"
+      },
+      "response": []
+    },
+    {
+      "name": "Create Shopping Cart",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Test: Status code should be 201",
+              "pm.test(\"Status code is 201\", function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "",
+              "// Test: Response has shopping_cart_id",
+              "pm.test(\"Response has shopping_cart_id\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property('shopping_cart_id');",
+              "    pm.expect(jsonData.shopping_cart_id).to.be.a('number');",
+              "    ",
+              "    // Save cart ID for subsequent requests",
+              "    pm.collectionVariables.set(\"shopping_cart_id\", jsonData.shopping_cart_id);",
+              "});",
+              "",
+              "// Test: Response time is under 100ms",
+              "pm.test(\"Response time is less than 100ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(100);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"customer_id\": 12345\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/shopping-carts",
+          "host": ["{{base_url}}"],
+          "path": ["shopping-carts"]
+        },
+        "description": "Create a new shopping cart for a customer"
+      },
+      "response": []
+    },
+    {
+      "name": "Add Item to Cart",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Test: Status code should be 204",
+              "pm.test(\"Status code is 204\", function () {",
+              "    pm.response.to.have.status(204);",
+              "});",
+              "",
+              "// Test: Response body is empty",
+              "pm.test(\"Response body is empty\", function () {",
+              "    pm.expect(pm.response.text()).to.equal('');",
+              "});",
+              "",
+              "// Test: Response time is under 100ms",
+              "pm.test(\"Response time is less than 100ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(100);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"product_id\": 100,\n  \"quantity\": 2\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/shopping-carts/{{shopping_cart_id}}/items",
+          "host": ["{{base_url}}"],
+          "path": ["shopping-carts", "{{shopping_cart_id}}", "items"]
+        },
+        "description": "Add an item to the shopping cart"
+      },
+      "response": []
+    },
+    {
+      "name": "Update Item Quantity (Override)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 204\", function () {",
+              "    pm.response.to.have.status(204);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"product_id\": 100,\n  \"quantity\": 5\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/shopping-carts/{{shopping_cart_id}}/items",
+          "host": ["{{base_url}}"],
+          "path": ["shopping-carts", "{{shopping_cart_id}}", "items"]
+        },
+        "description": "Update existing item - should OVERRIDE quantity to 5 (not add)"
+      },
+      "response": []
+    },
+    {
+      "name": "Add Another Item",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"product_id\": 101,\n  \"quantity\": 3\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/shopping-carts/{{shopping_cart_id}}/items",
+          "host": ["{{base_url}}"],
+          "path": ["shopping-carts", "{{shopping_cart_id}}", "items"]
+        },
+        "description": "Add a different product to the cart"
+      },
+      "response": []
+    },
+    {
+      "name": "Get Shopping Cart",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Test: Status code should be 200",
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "// Test: Response has correct structure",
+              "pm.test(\"Response has correct structure\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property('shopping_cart_id');",
+              "    pm.expect(jsonData).to.have.property('customer_id');",
+              "    pm.expect(jsonData).to.have.property('items');",
+              "    pm.expect(jsonData.items).to.be.an('array');",
+              "});",
+              "",
+              "// Test: Items array contains expected items",
+              "pm.test(\"Items array has correct data\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.items.length).to.be.at.least(1);",
+              "    ",
+              "    // Check first item has product_id and quantity",
+              "    pm.expect(jsonData.items[0]).to.have.property('product_id');",
+              "    pm.expect(jsonData.items[0]).to.have.property('quantity');",
+              "    pm.expect(jsonData.items[0].product_id).to.be.a('number');",
+              "    pm.expect(jsonData.items[0].quantity).to.be.a('number');",
+              "});",
+              "",
+              "// Test: Response time is under 50ms (requirement)",
+              "pm.test(\"Response time is less than 50ms\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(50);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/shopping-carts/{{shopping_cart_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["shopping-carts", "{{shopping_cart_id}}"]
+        },
+        "description": "Retrieve shopping cart details"
+      },
+      "response": []
+    },
+    {
+      "name": "Get Non-Existent Cart (404)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Test: Status code should be 404",
+              "pm.test(\"Status code is 404\", function () {",
+              "    pm.response.to.have.status(404);",
+              "});",
+              "",
+              "// Test: Error response format",
+              "pm.test(\"Error response has correct format\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property('error');",
+              "    pm.expect(jsonData).to.have.property('message');",
+              "    pm.expect(jsonData.error).to.equal('CART_NOT_FOUND');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/shopping-carts/9999999999999",
+          "host": ["{{base_url}}"],
+          "path": ["shopping-carts", "9999999999999"]
+        },
+        "description": "Test 404 error handling"
+      },
+      "response": []
+    },
+    {
+      "name": "Add Item - Invalid Data (400)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Test: Status code should be 400",
+              "pm.test(\"Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              "",
+              "// Test: Error response format",
+              "pm.test(\"Error response has correct format\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property('error');",
+              "    pm.expect(jsonData).to.have.property('message');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"product_id\": -1,\n  \"quantity\": 0\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/shopping-carts/{{shopping_cart_id}}/items",
+          "host": ["{{base_url}}"],
+          "path": ["shopping-carts", "{{shopping_cart_id}}", "items"]
+        },
+        "description": "Test validation - negative product_id and zero quantity"
+      },
+      "response": []
+    },
+    {
+      "name": "Create Cart - Invalid Customer ID (400)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"customer_id\": -999\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/shopping-carts",
+          "host": ["{{base_url}}"],
+          "path": ["shopping-carts"]
+        },
+        "description": "Test validation - negative customer_id"
+      },
+      "response": []
+    }
+  ]
+}

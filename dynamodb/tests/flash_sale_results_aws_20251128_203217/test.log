@@ -1,0 +1,3 @@
+[2025-11-28 20:32:17,420] sujies-MacBook-Pro/WARNING/locust.runners: Your selected spawn rate is very high (>100), and this is known to sometimes cause issues. Do you really need to ramp up that fast?
+[2025-11-28 20:32:17,423] sujies-MacBook-Pro/INFO/locust.runners: Ramping to 500 users at a rate of 200.00 per second
+[2025-11-28 20:32:19,432] sujies-MacBook-Pro/INFO/locust.runners: All users spawned: {"ShoppingCartUser": 500} (500 total users)

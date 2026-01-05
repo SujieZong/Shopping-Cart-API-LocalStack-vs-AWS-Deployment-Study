@@ -1,0 +1,35 @@
+[
+  {
+    "test_name": "non_existent_cart",
+    "description": "Get cart that doesn't exist",
+    "request_sent": "",
+    "expected_status": 404,
+    "actual_status": 404,
+    "response_time_ms": 6.579,
+    "success": true,
+    "response_body": "{\"error\":\"NOT_FOUND\",\"message\":\"Shopping cart not found\"}",
+    "timestamp": "2025-11-29T14:32:23-08:00"
+  },
+  {
+    "test_name": "add_item_to_non_existent_cart",
+    "description": "Add item to cart that doesn't exist",
+    "request_sent": "{\"product_id\":100,\"quantity\":5}",
+    "expected_status": 404,
+    "actual_status": 404,
+    "response_time_ms": 1.775,
+    "success": true,
+    "response_body": "{\"error\":\"NOT_FOUND\",\"message\":\"Shopping cart not found\"}",
+    "timestamp": "2025-11-29T14:32:23-08:00"
+  },
+  {
+    "test_name": "invalid_cart_id_format",
+    "description": "Get cart with invalid ID format",
+    "request_sent": "",
+    "expected_status": 400,
+    "actual_status": 404,
+    "response_time_ms": 1.087,
+    "success": false,
+    "response_body": "{\"error\":\"NOT_FOUND\",\"message\":\"Shopping cart not found\"}",
+    "timestamp": "2025-11-29T14:32:23-08:00"
+  }
+]

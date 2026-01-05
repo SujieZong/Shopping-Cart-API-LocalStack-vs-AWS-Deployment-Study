@@ -1,0 +1,9 @@
+version: "3.8"
+
+services:
+  api:
+    environment:
+      DB_HOST: ls-mysql-046d0024
+      DB_PORT: 3306
+    external_links:
+      - ls-mysql-046d0024:mysql

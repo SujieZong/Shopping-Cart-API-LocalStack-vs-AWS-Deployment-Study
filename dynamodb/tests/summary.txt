@@ -1,0 +1,448 @@
+
+local load_scaling_results
+Using BASE_URL from environment variable: http://localhost:8080
+Using BASE_URL from environment variable: http://localhost:8080
+=== RUN   TestLoadScaling
+
+=== Checking server connectivity at http://localhost:8080 ===
+✓ Server is reachable (status: 200)
+
+
+╔════════════════════════════════════════╗
+║  Testing Load Level: 150 operations     ║
+╚════════════════════════════════════════╝
+
+=== Running load test with 50 carts ===
+Creating 50 carts...
+Created 50 carts
+Adding items to 50 carts...
+Retrieving 50 carts...
+
+--- Results for 150 operations ---
+Duration: 2.25 seconds
+Throughput: 66.61 ops/sec
+Success Rate: 100.00%
+Avg Response Time: 83.45 ms
+P50: 47.58 ms
+P95: 376.10 ms
+P99: 603.20 ms
+
+Waiting 10 seconds before next load level...
+
+
+╔════════════════════════════════════════╗
+║  Testing Load Level: 300 operations     ║
+╚════════════════════════════════════════╝
+
+=== Running load test with 100 carts ===
+Creating 100 carts...
+Created 100 carts
+Adding items to 100 carts...
+Retrieving 100 carts...
+
+--- Results for 300 operations ---
+Duration: 1.90 seconds
+Throughput: 158.23 ops/sec
+Success Rate: 100.00%
+Avg Response Time: 52.07 ms
+P50: 41.13 ms
+P95: 138.86 ms
+P99: 430.04 ms
+
+Waiting 10 seconds before next load level...
+
+
+╔════════════════════════════════════════╗
+║  Testing Load Level: 501 operations     ║
+╚════════════════════════════════════════╝
+
+=== Running load test with 167 carts ===
+Creating 167 carts...
+Created 167 carts
+Adding items to 167 carts...
+Retrieving 167 carts...
+
+--- Results for 501 operations ---
+Duration: 2.42 seconds
+Throughput: 207.10 ops/sec
+Success Rate: 100.00%
+Avg Response Time: 53.58 ms
+P50: 44.87 ms
+P95: 92.89 ms
+P99: 395.58 ms
+
+
+✓ Results saved to: load_scaling_results.json
+
+
+╔════════════════════════════════════════════════════════════════╗
+║              LOAD SCALING COMPARISON SUMMARY                  ║
+╚════════════════════════════════════════════════════════════════╝
+
+Load Level      Throughput      Avg Latency     P95             Success Rate   
+--------------------------------------------------------------------------------
+50              66.61           83.45           376.10          100.00         %
+100             158.23          52.07           138.86          100.00         %
+167             207.10          53.58           92.89           100.00         %
+--- PASS: TestLoadScaling (26.58s)
+PASS
+ok      tests   28.631s
+
+sujiezong@sujies-MacBook-Pro tests % go test -v -run TestInvalidRequests -timeout 5m
+go test -v -run TestMissingResources -timeout 5m
+go test -v -run TestMalformedData -timeout 5m
+Using BASE_URL from environment variable: http://localhost:8080
+Using BASE_URL from environment variable: http://localhost:8080
+Using BASE_URL from environment variable: http://localhost:8080
+Using BASE_URL from environment variable: http://localhost:8080
+Using BASE_URL from environment variable: http://localhost:8080
+=== RUN   TestInvalidRequests
+
+╔════════════════════════════════════════╗
+║      FAILURE MODE: INVALID REQUESTS    ║
+╚════════════════════════════════════════╝
+=== RUN   TestInvalidRequests/MissingCustomerID
+
+✓ Test: missing_customer_id
+  Expected Status: 400, Got: 400
+  Response Time: 3.46 ms
+  Handled correctly: true
+=== RUN   TestInvalidRequests/InvalidCustomerIDType
+
+✓ Test: invalid_customer_id_type
+  Expected Status: 400, Got: 400
+  Response Time: 0.21 ms
+  Handled correctly: true
+=== RUN   TestInvalidRequests/NegativeCustomerID
+
+✓ Test: negative_customer_id
+  Expected Status: 400, Got: 400
+  Response Time: 0.13 ms
+  Handled correctly: true
+=== RUN   TestInvalidRequests/MissingProductID
+
+✓ Test: missing_product_id
+  Expected Status: 400, Got: 400
+  Response Time: 0.13 ms
+  Handled correctly: true
+=== RUN   TestInvalidRequests/InvalidQuantity
+
+✓ Test: zero_quantity
+  Expected Status: 400, Got: 400
+  Response Time: 0.14 ms
+  Handled correctly: true
+=== RUN   TestInvalidRequests/MalformedJSON
+
+✓ Test: malformed_json
+  Expected Status: 400, Got: 400
+  Response Time: 0.15 ms
+  Handled correctly: true
+
+
+═══════════════════════════════════════════════════════
+Summary for invalid_requests:
+  Total Tests: 6
+  Correctly Handled: 6 (100.00%)
+  Results saved to: failure_mode_invalid_requests_results.json
+═══════════════════════════════════════════════════════
+--- PASS: TestInvalidRequests (0.04s)
+    --- PASS: TestInvalidRequests/MissingCustomerID (0.00s)
+    --- PASS: TestInvalidRequests/InvalidCustomerIDType (0.00s)
+    --- PASS: TestInvalidRequests/NegativeCustomerID (0.00s)
+    --- PASS: TestInvalidRequests/MissingProductID (0.03s)
+    --- PASS: TestInvalidRequests/InvalidQuantity (0.01s)
+    --- PASS: TestInvalidRequests/MalformedJSON (0.00s)
+PASS
+ok      tests   2.251s
+Using BASE_URL from environment variable: http://localhost:8080
+Using BASE_URL from environment variable: http://localhost:8080
+Using BASE_URL from environment variable: http://localhost:8080
+Using BASE_URL from environment variable: http://localhost:8080
+Using BASE_URL from environment variable: http://localhost:8080
+=== RUN   TestMissingResources
+
+╔════════════════════════════════════════╗
+║    FAILURE MODE: MISSING RESOURCES     ║
+╚════════════════════════════════════════╝
+=== RUN   TestMissingResources/NonExistentCart
+
+✓ Test: non_existent_cart
+  Expected Status: 404, Got: 404
+  Response Time: 11.51 ms
+  Handled correctly: true
+=== RUN   TestMissingResources/AddItemToNonExistentCart
+
+✓ Test: add_item_to_non_existent_cart
+  Expected Status: 404, Got: 404
+  Response Time: 8.57 ms
+  Handled correctly: true
+=== RUN   TestMissingResources/InvalidCartIDFormat
+
+✓ Test: invalid_cart_id_format
+  Expected Status: 400, Got: 400
+  Response Time: 0.13 ms
+  Handled correctly: true
+
+
+═══════════════════════════════════════════════════════
+Summary for missing_resources:
+  Total Tests: 3
+  Correctly Handled: 3 (100.00%)
+  Results saved to: failure_mode_missing_resources_results.json
+═══════════════════════════════════════════════════════
+--- PASS: TestMissingResources (0.02s)
+    --- PASS: TestMissingResources/NonExistentCart (0.01s)
+    --- PASS: TestMissingResources/AddItemToNonExistentCart (0.01s)
+    --- PASS: TestMissingResources/InvalidCartIDFormat (0.00s)
+PASS
+ok      tests   1.949s
+Using BASE_URL from environment variable: http://localhost:8080
+Using BASE_URL from environment variable: http://localhost:8080
+Using BASE_URL from environment variable: http://localhost:8080
+Using BASE_URL from environment variable: http://localhost:8080
+Using BASE_URL from environment variable: http://localhost:8080
+=== RUN   TestMalformedData
+
+╔════════════════════════════════════════╗
+║     FAILURE MODE: MALFORMED DATA       ║
+╚════════════════════════════════════════╝
+=== RUN   TestMalformedData/ExtraFields
+
+✓ Test: extra_fields
+  Expected Status: 201, Got: 201
+  Response Time: 7.35 ms
+  Handled correctly: true
+=== RUN   TestMalformedData/LargeCustomerID
+
+✓ Test: large_customer_id
+  Expected Status: 201, Got: 201
+  Response Time: 7.20 ms
+  Handled correctly: true
+=== RUN   TestMalformedData/EmptyJSON
+
+✓ Test: empty_json
+  Expected Status: 400, Got: 400
+  Response Time: 0.13 ms
+  Handled correctly: true
+
+
+═══════════════════════════════════════════════════════
+Summary for malformed_data:
+  Total Tests: 3
+  Correctly Handled: 3 (100.00%)
+  Results saved to: failure_mode_malformed_data_results.json
+═══════════════════════════════════════════════════════
+--- PASS: TestMalformedData (0.02s)
+    --- PASS: TestMalformedData/ExtraFields (0.01s)
+    --- PASS: TestMalformedData/LargeCustomerID (0.01s)
+    --- PASS: TestMalformedData/EmptyJSON (0.00s)
+PASS
+ok      tests   1.957s
+
+sujiezong@sujies-MacBook-Pro tests % go test -v -run TestDynamoDBPerformance -timeout 10m
+Successfully retrieved base URL from Terraform: http://dynamodb-homework7-alb-416581147.us-west-2.elb.amazonaws.com
+Successfully retrieved base URL from Terraform: http://dynamodb-homework7-alb-416581147.us-west-2.elb.amazonaws.com
+Successfully retrieved base URL from Terraform: http://dynamodb-homework7-alb-416581147.us-west-2.elb.amazonaws.com
+Successfully retrieved base URL from Terraform: http://dynamodb-homework7-alb-416581147.us-west-2.elb.amazonaws.com
+Successfully retrieved base URL from Terraform: http://dynamodb-homework7-alb-416581147.us-west-2.elb.amazonaws.com
+=== RUN   TestDynamoDBPerformance
+
+=== Starting DynamoDB Performance Test ===
+Running 50 CREATE operations...
+Completed CREATE operations. Created 50 carts.
+Running 50 ADD_ITEMS operations...
+Completed ADD_ITEMS operations.
+Running 50 GET_CART operations...
+Completed GET_CART operations.
+
+Results saved to: dynamodb_test_results.json
+
+=== Performance Test Summary ===
+
+CREATE_CART:
+  Total: 50
+  Successful: 50 (100.00%)
+  Failed: 0
+  Response Time:
+    Average: 36.49 ms
+    Min: 28.18 ms
+    Max: 153.67 ms
+
+ADD_ITEMS:
+  Total: 50
+  Successful: 50 (100.00%)
+  Failed: 0
+  Response Time:
+    Average: 51.93 ms
+    Min: 41.38 ms
+    Max: 90.99 ms
+
+GET_CART:
+  Total: 50
+  Successful: 50 (100.00%)
+  Failed: 0
+  Response Time:
+    Average: 32.02 ms
+    Min: 25.31 ms
+    Max: 104.68 ms
+
+OVERALL:
+  Total Operations: 150
+  Successful: 150 (100.00%)
+  Failed: 0
+  Average Response Time: 40.15 ms
+
+================================
+--- PASS: TestDynamoDBPerformance (8.67s)
+PASS
+ok      tests   10.988s
+
+
+sujiezong@sujies-MacBook-Pro tests % go test -v -run TestLoadScaling -timeout 30m
+Successfully retrieved base URL from Terraform: http://dynamodb-homework7-alb-416581147.us-west-2.elb.amazonaws.com
+Successfully retrieved base URL from Terraform: http://dynamodb-homework7-alb-416581147.us-west-2.elb.amazonaws.com
+Successfully retrieved base URL from Terraform: http://dynamodb-homework7-alb-416581147.us-west-2.elb.amazonaws.com
+Successfully retrieved base URL from Terraform: http://dynamodb-homework7-alb-416581147.us-west-2.elb.amazonaws.com
+Successfully retrieved base URL from Terraform: http://dynamodb-homework7-alb-416581147.us-west-2.elb.amazonaws.com
+=== RUN   TestLoadScaling
+
+=== Checking server connectivity at http://dynamodb-homework7-alb-416581147.us-west-2.elb.amazonaws.com ===
+✓ Server is reachable (status: 200)
+
+
+╔════════════════════════════════════════╗
+║  Testing Load Level: 150 operations     ║
+╚════════════════════════════════════════╝
+
+=== Running load test with 50 carts ===
+Creating 50 carts...
+Created 50 carts
+Adding items to 50 carts...
+Retrieving 50 carts...
+
+--- Results for 150 operations ---
+Duration: 1.53 seconds
+Throughput: 98.27 ops/sec
+Success Rate: 100.00%
+Avg Response Time: 61.68 ms
+P50: 42.98 ms
+P95: 146.71 ms
+P99: 156.82 ms
+
+Waiting 10 seconds before next load level...
+
+
+╔════════════════════════════════════════╗
+║  Testing Load Level: 300 operations     ║
+╚════════════════════════════════════════╝
+
+=== Running load test with 100 carts ===
+Creating 100 carts...
+Created 100 carts
+Adding items to 100 carts...
+Retrieving 100 carts...
+
+--- Results for 300 operations ---
+Duration: 1.77 seconds
+Throughput: 169.10 ops/sec
+Success Rate: 100.00%
+Avg Response Time: 45.08 ms
+P50: 41.33 ms
+P95: 65.14 ms
+P99: 99.99 ms
+
+Waiting 10 seconds before next load level...
+
+
+╔════════════════════════════════════════╗
+║  Testing Load Level: 501 operations     ║
+╚════════════════════════════════════════╝
+
+=== Running load test with 167 carts ===
+Creating 167 carts...
+Created 167 carts
+Adding items to 167 carts...
+Retrieving 167 carts...
+
+--- Results for 501 operations ---
+Duration: 2.12 seconds
+Throughput: 236.21 ops/sec
+Success Rate: 100.00%
+Avg Response Time: 42.15 ms
+P50: 35.98 ms
+P95: 67.09 ms
+P99: 78.60 ms
+
+
+✓ Results saved to: load_scaling_results.json
+
+
+╔════════════════════════════════════════════════════════════════╗
+║              LOAD SCALING COMPARISON SUMMARY                  ║
+╚════════════════════════════════════════════════════════════════╝
+
+Load Level      Throughput      Avg Latency     P95             Success Rate   
+--------------------------------------------------------------------------------
+50              98.27           61.68           146.71          100.00         %
+100             169.10          45.08           65.14           100.00         %
+167             236.21          42.15           67.09           100.00         %
+--- PASS: TestLoadScaling (25.52s)
+PASS
+ok      tests   27.742s
+
+sujiezong@sujies-MacBook-Pro tests % go test -v -run TestColdStart -timeout 5m
+Successfully retrieved base URL from Terraform: http://dynamodb-homework7-alb-1840035908.us-west-2.elb.amazonaws.com
+Successfully retrieved base URL from Terraform: http://dynamodb-homework7-alb-1840035908.us-west-2.elb.amazonaws.com
+Successfully retrieved base URL from Terraform: http://dynamodb-homework7-alb-1840035908.us-west-2.elb.amazonaws.com
+Successfully retrieved base URL from Terraform: http://dynamodb-homework7-alb-1840035908.us-west-2.elb.amazonaws.com
+Successfully retrieved base URL from Terraform: http://dynamodb-homework7-alb-1840035908.us-west-2.elb.amazonaws.com
+=== RUN   TestColdStart
+
+╔════════════════════════════════════════╗
+║      COLD START MEASUREMENT TEST      ║
+╚════════════════════════════════════════╝
+
+Base URL: http://dynamodb-homework7-alb-1840035908.us-west-2.elb.amazonaws.com
+
+NOTE: This test should be run immediately after:
+  - AWS: terraform apply / azd up
+  - LocalStack: docker-compose up
+
+Waiting for service to become ready...
+Attempt 1/60... Status: 503
+Attempt 2/60... Status: 503
+Attempt 3/60... Status: 503
+Attempt 4/60... Status: 503
+Attempt 5/60... Status: 503
+Attempt 6/60... Status: 503
+Attempt 7/60... ✓ Success after 30.44 seconds
+
+Attempting first create cart request...
+✓ First request succeeded (121.32 ms)
+
+Verifying stability with 5 consecutive requests...
+  Request 1: ✓
+  Request 2: ✓
+  Request 3: ✓
+  Request 4: ✓
+  Request 5: ✓
+Stability: 5/5 successful
+
+
+╔════════════════════════════════════════════════════════════════╗
+║                  COLD START SUMMARY                           ║
+╚════════════════════════════════════════════════════════════════╝
+
+Environment: aws
+Infrastructure Up Time: 30.44 seconds
+Time to First Successful Request: 0.12 seconds
+Total Cold Start Time: 30.44 seconds
+Attempts Until Ready: 7
+Health Check Latency: 50.89 ms
+First Create Latency: 121.32 ms
+Consecutive Successes: 5/5
+
+✓ Results saved to: cold_start_aws_results.json
+--- PASS: TestColdStart (31.45s)
+PASS
+ok      tests   33.789s

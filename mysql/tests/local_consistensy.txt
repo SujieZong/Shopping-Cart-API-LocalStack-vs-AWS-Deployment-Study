@@ -1,0 +1,187 @@
+sujiezong@sujies-MacBook-Pro tests % o test -v -run TestCreateThenReadConsistency -timeout 5m
+go test -v -run TestAddItemThenReadConsistency -timeout 5m
+go test -v -run TestRapidConcurrentUpdates -timeout 5m
+go test -v -run TestWriteReadWritePattern -timeout 5m
+zsh: command not found: o
+Using API_URL from environment variable or default: http://localhost:3000
+Using API_URL from environment variable or default: http://localhost:3000
+Using API_URL from environment variable or default: http://localhost:3000
+Using API_URL from environment variable or default: http://localhost:3000
+=== RUN   TestAddItemThenReadConsistency
+Running Add-Item-then-Read Consistency Test...
+    consistency_test.go:228: ✓ Item found in cart 370 (took 2.407167ms)
+    consistency_test.go:228: ✓ Item found in cart 371 (took 2.581458ms)
+    consistency_test.go:228: ✓ Item found in cart 372 (took 1.887375ms)
+    consistency_test.go:228: ✓ Item found in cart 373 (took 1.818416ms)
+    consistency_test.go:228: ✓ Item found in cart 374 (took 1.766417ms)
+    consistency_test.go:228: ✓ Item found in cart 375 (took 1.51025ms)
+    consistency_test.go:228: ✓ Item found in cart 376 (took 2.440667ms)
+    consistency_test.go:228: ✓ Item found in cart 377 (took 1.732834ms)
+    consistency_test.go:228: ✓ Item found in cart 378 (took 3.071583ms)
+    consistency_test.go:228: ✓ Item found in cart 379 (took 2.847042ms)
+    consistency_test.go:228: ✓ Item found in cart 380 (took 3.144584ms)
+    consistency_test.go:228: ✓ Item found in cart 381 (took 3.365292ms)
+    consistency_test.go:228: ✓ Item found in cart 382 (took 1.94075ms)
+    consistency_test.go:228: ✓ Item found in cart 383 (took 2.212417ms)
+    consistency_test.go:228: ✓ Item found in cart 384 (took 2.0555ms)
+    consistency_test.go:228: ✓ Item found in cart 385 (took 1.70475ms)
+    consistency_test.go:228: ✓ Item found in cart 386 (took 2.158958ms)
+    consistency_test.go:228: ✓ Item found in cart 387 (took 1.683583ms)
+    consistency_test.go:228: ✓ Item found in cart 388 (took 2.368666ms)
+    consistency_test.go:228: ✓ Item found in cart 389 (took 1.138041ms)
+
+=== Consistency Metrics Report ===
+Total Attempts: 20
+Consistent Reads: 20 (100.00%)
+Inconsistent Reads: 0 (0.00%)
+Failed Reads: 0
+
+Time to Consistency:
+  Min: 1.138041ms
+  Max: 3.365292ms
+  Avg: 2.191787ms
+==================================
+
+    consistency_test.go:509: ✓ Results saved to: localstack_consistency_add_item_then_read_results.json
+--- PASS: TestAddItemThenReadConsistency (4.31s)
+PASS
+ok      mysql-tests     4.760s
+Using API_URL from environment variable or default: http://localhost:3000
+Using API_URL from environment variable or default: http://localhost:3000
+Using API_URL from environment variable or default: http://localhost:3000
+Using API_URL from environment variable or default: http://localhost:3000
+=== RUN   TestRapidConcurrentUpdates
+Running Rapid Concurrent Updates Test...
+    consistency_test.go:297: Writer 1: ✓ Added item 310 (qty: 2)
+    consistency_test.go:297: Writer 2: ✓ Added item 320 (qty: 3)
+    consistency_test.go:297: Writer 0: ✓ Added item 300 (qty: 1)
+    consistency_test.go:297: Writer 3: ✓ Added item 330 (qty: 4)
+    consistency_test.go:297: Writer 4: ✓ Added item 340 (qty: 5)
+    consistency_test.go:297: Writer 1: ✓ Added item 311 (qty: 2)
+    consistency_test.go:297: Writer 3: ✓ Added item 331 (qty: 4)
+    consistency_test.go:297: Writer 0: ✓ Added item 301 (qty: 1)
+    consistency_test.go:297: Writer 4: ✓ Added item 341 (qty: 5)
+    consistency_test.go:297: Writer 2: ✓ Added item 321 (qty: 3)
+    consistency_test.go:297: Writer 1: ✓ Added item 312 (qty: 2)
+    consistency_test.go:297: Writer 3: ✓ Added item 332 (qty: 4)
+    consistency_test.go:297: Writer 4: ✓ Added item 342 (qty: 5)
+    consistency_test.go:297: Writer 0: ✓ Added item 302 (qty: 1)
+    consistency_test.go:297: Writer 2: ✓ Added item 322 (qty: 3)
+
+Reading cart state multiple times...
+    consistency_test.go:318: Read 1: Found 9 items
+    consistency_test.go:322:   - Product 310: Quantity 2
+    consistency_test.go:322:   - Product 311: Quantity 2
+    consistency_test.go:322:   - Product 312: Quantity 2
+    consistency_test.go:322:   - Product 320: Quantity 3
+    consistency_test.go:322:   - Product 321: Quantity 3
+    consistency_test.go:322:   - Product 322: Quantity 3
+    consistency_test.go:322:   - Product 331: Quantity 4
+    consistency_test.go:322:   - Product 332: Quantity 4
+    consistency_test.go:322:   - Product 342: Quantity 5
+    consistency_test.go:318: Read 2: Found 9 items
+    consistency_test.go:322:   - Product 310: Quantity 2
+    consistency_test.go:322:   - Product 311: Quantity 2
+    consistency_test.go:322:   - Product 312: Quantity 2
+    consistency_test.go:322:   - Product 320: Quantity 3
+    consistency_test.go:322:   - Product 321: Quantity 3
+    consistency_test.go:322:   - Product 322: Quantity 3
+    consistency_test.go:322:   - Product 331: Quantity 4
+    consistency_test.go:322:   - Product 332: Quantity 4
+    consistency_test.go:322:   - Product 342: Quantity 5
+    consistency_test.go:318: Read 3: Found 9 items
+    consistency_test.go:322:   - Product 310: Quantity 2
+    consistency_test.go:322:   - Product 311: Quantity 2
+    consistency_test.go:322:   - Product 312: Quantity 2
+    consistency_test.go:322:   - Product 320: Quantity 3
+    consistency_test.go:322:   - Product 321: Quantity 3
+    consistency_test.go:322:   - Product 322: Quantity 3
+    consistency_test.go:322:   - Product 331: Quantity 4
+    consistency_test.go:322:   - Product 332: Quantity 4
+    consistency_test.go:322:   - Product 342: Quantity 5
+    consistency_test.go:318: Read 4: Found 9 items
+    consistency_test.go:322:   - Product 310: Quantity 2
+    consistency_test.go:322:   - Product 311: Quantity 2
+    consistency_test.go:322:   - Product 312: Quantity 2
+    consistency_test.go:322:   - Product 320: Quantity 3
+    consistency_test.go:322:   - Product 321: Quantity 3
+    consistency_test.go:322:   - Product 322: Quantity 3
+    consistency_test.go:322:   - Product 331: Quantity 4
+    consistency_test.go:322:   - Product 332: Quantity 4
+    consistency_test.go:322:   - Product 342: Quantity 5
+    consistency_test.go:318: Read 5: Found 9 items
+    consistency_test.go:322:   - Product 310: Quantity 2
+    consistency_test.go:322:   - Product 311: Quantity 2
+    consistency_test.go:322:   - Product 312: Quantity 2
+    consistency_test.go:322:   - Product 320: Quantity 3
+    consistency_test.go:322:   - Product 321: Quantity 3
+    consistency_test.go:322:   - Product 322: Quantity 3
+    consistency_test.go:322:   - Product 331: Quantity 4
+    consistency_test.go:322:   - Product 332: Quantity 4
+    consistency_test.go:322:   - Product 342: Quantity 5
+    consistency_test.go:318: Read 6: Found 9 items
+    consistency_test.go:322:   - Product 310: Quantity 2
+    consistency_test.go:322:   - Product 311: Quantity 2
+    consistency_test.go:322:   - Product 312: Quantity 2
+    consistency_test.go:322:   - Product 320: Quantity 3
+    consistency_test.go:322:   - Product 321: Quantity 3
+    consistency_test.go:322:   - Product 322: Quantity 3
+    consistency_test.go:322:   - Product 331: Quantity 4
+    consistency_test.go:322:   - Product 332: Quantity 4
+    consistency_test.go:322:   - Product 342: Quantity 5
+    consistency_test.go:318: Read 7: Found 9 items
+    consistency_test.go:322:   - Product 310: Quantity 2
+    consistency_test.go:322:   - Product 311: Quantity 2
+    consistency_test.go:322:   - Product 312: Quantity 2
+    consistency_test.go:322:   - Product 320: Quantity 3
+    consistency_test.go:322:   - Product 321: Quantity 3
+    consistency_test.go:322:   - Product 322: Quantity 3
+    consistency_test.go:322:   - Product 331: Quantity 4
+    consistency_test.go:322:   - Product 332: Quantity 4
+    consistency_test.go:322:   - Product 342: Quantity 5
+    consistency_test.go:318: Read 8: Found 9 items
+    consistency_test.go:322:   - Product 310: Quantity 2
+    consistency_test.go:322:   - Product 311: Quantity 2
+    consistency_test.go:322:   - Product 312: Quantity 2
+    consistency_test.go:322:   - Product 320: Quantity 3
+    consistency_test.go:322:   - Product 321: Quantity 3
+    consistency_test.go:322:   - Product 322: Quantity 3
+    consistency_test.go:322:   - Product 331: Quantity 4
+    consistency_test.go:322:   - Product 332: Quantity 4
+    consistency_test.go:322:   - Product 342: Quantity 5
+    consistency_test.go:318: Read 9: Found 9 items
+    consistency_test.go:322:   - Product 310: Quantity 2
+    consistency_test.go:322:   - Product 311: Quantity 2
+    consistency_test.go:322:   - Product 312: Quantity 2
+    consistency_test.go:322:   - Product 320: Quantity 3
+    consistency_test.go:322:   - Product 321: Quantity 3
+    consistency_test.go:322:   - Product 322: Quantity 3
+    consistency_test.go:322:   - Product 331: Quantity 4
+    consistency_test.go:322:   - Product 332: Quantity 4
+    consistency_test.go:322:   - Product 342: Quantity 5
+    consistency_test.go:318: Read 10: Found 9 items
+    consistency_test.go:322:   - Product 310: Quantity 2
+    consistency_test.go:322:   - Product 311: Quantity 2
+    consistency_test.go:322:   - Product 312: Quantity 2
+    consistency_test.go:322:   - Product 320: Quantity 3
+    consistency_test.go:322:   - Product 321: Quantity 3
+    consistency_test.go:322:   - Product 322: Quantity 3
+    consistency_test.go:322:   - Product 331: Quantity 4
+    consistency_test.go:322:   - Product 332: Quantity 4
+    consistency_test.go:322:   - Product 342: Quantity 5
+    consistency_test.go:326: 
+        Consistent consecutive reads: 9/9
+--- PASS: TestRapidConcurrentUpdates (2.63s)
+PASS
+ok      mysql-tests     2.915s
+Using API_URL from environment variable or default: http://localhost:3000
+Using API_URL from environment variable or default: http://localhost:3000
+Using API_URL from environment variable or default: http://localhost:3000
+Using API_URL from environment variable or default: http://localhost:3000
+=== RUN   TestWriteReadWritePattern
+Running Write-Read-Write Pattern Test...
+    consistency_test.go:361: Current quantity for product 500: 10
+    consistency_test.go:385: Final quantity for product 500: 15 (expected: 15)
+--- PASS: TestWriteReadWritePattern (0.43s)
+PASS
+ok      mysql-tests     0.709s

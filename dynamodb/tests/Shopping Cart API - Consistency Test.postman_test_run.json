@@ -1,0 +1,204 @@
+{
+	"id": "93362cd1-56e0-4970-8230-b4af915b683e",
+	"name": "Shopping Cart API - Consistency Test",
+	"timestamp": "2025-10-31T22:11:30.330Z",
+	"collection_id": "49021735-66f82958-2b2f-4021-8633-005c6e886ec2",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 10,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2025-10-31T22:11:29.514Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "e933f03e-0699-485a-99c8-9dae63e6e1d4",
+			"name": "Setup - Clear Test Results",
+			"url": "http://homework7-alb-817652543.us-west-2.elb.amazonaws.com/health",
+			"time": 111,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				111
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "dbd604df-3ef5-400d-9d98-b878a78c39c8",
+			"name": "1. Create Cart (Run 50x)",
+			"url": "http://homework7-alb-817652543.us-west-2.elb.amazonaws.com/shopping-carts",
+			"time": 88,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"[1] Create cart - Status 201": true,
+				"[1] Create cart - Response has shopping_cart_id": true,
+				"[1] Create cart - Response time < 200ms": true
+			},
+			"testPassFailCounts": {
+				"[1] Create cart - Status 201": {
+					"pass": 1,
+					"fail": 0
+				},
+				"[1] Create cart - Response has shopping_cart_id": {
+					"pass": 1,
+					"fail": 0
+				},
+				"[1] Create cart - Response time < 200ms": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				88
+			],
+			"allTests": [
+				{
+					"[1] Create cart - Status 201": true,
+					"[1] Create cart - Response has shopping_cart_id": true,
+					"[1] Create cart - Response time < 200ms": true
+				}
+			]
+		},
+		{
+			"id": "b9eb4b89-d4b8-44a2-9f0b-bfe4709e403d",
+			"name": "2. Add Item to Cart (Run 50x)",
+			"url": "http://homework7-alb-817652543.us-west-2.elb.amazonaws.com/shopping-carts/1761948689930754/items",
+			"time": 158,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				"[2] Add item - Status 204": true,
+				"[2] Add item - Response time < 200ms": true
+			},
+			"testPassFailCounts": {
+				"[2] Add item - Status 204": {
+					"pass": 1,
+					"fail": 0
+				},
+				"[2] Add item - Response time < 200ms": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				158
+			],
+			"allTests": [
+				{
+					"[2] Add item - Status 204": true,
+					"[2] Add item - Response time < 200ms": true
+				}
+			]
+		},
+		{
+			"id": "addb6122-f2db-4033-80c2-24bf279dd559",
+			"name": "3. Get Cart (Run 50x)",
+			"url": "http://homework7-alb-817652543.us-west-2.elb.amazonaws.com/shopping-carts/1761948689930754",
+			"time": 66,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"[3] Get cart - Status 200": true,
+				"[3] Get cart - Has correct structure": true,
+				"[3] Get cart - Response time < 100ms": true
+			},
+			"testPassFailCounts": {
+				"[3] Get cart - Status 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"[3] Get cart - Has correct structure": {
+					"pass": 1,
+					"fail": 0
+				},
+				"[3] Get cart - Response time < 100ms": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				66
+			],
+			"allTests": [
+				{
+					"[3] Get cart - Status 200": true,
+					"[3] Get cart - Has correct structure": true,
+					"[3] Get cart - Response time < 100ms": true
+				}
+			]
+		},
+		{
+			"id": "7c109fdf-156d-44c3-90d0-c9d855a77cc1",
+			"name": "Summary - Generate Test Report",
+			"url": "http://homework7-alb-817652543.us-west-2.elb.amazonaws.com/health",
+			"time": 26,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"All operations completed": true,
+				"Success rate > 95%": true
+			},
+			"testPassFailCounts": {
+				"All operations completed": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Success rate > 95%": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				26
+			],
+			"allTests": [
+				{
+					"All operations completed": true,
+					"Success rate > 95%": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 449,
+	"collection": {
+		"requests": [
+			{
+				"id": "e933f03e-0699-485a-99c8-9dae63e6e1d4",
+				"method": "GET"
+			},
+			{
+				"id": "dbd604df-3ef5-400d-9d98-b878a78c39c8",
+				"method": "POST"
+			},
+			{
+				"id": "b9eb4b89-d4b8-44a2-9f0b-bfe4709e403d",
+				"method": "POST"
+			},
+			{
+				"id": "addb6122-f2db-4033-80c2-24bf279dd559",
+				"method": "GET"
+			},
+			{
+				"id": "7c109fdf-156d-44c3-90d0-c9d855a77cc1",
+				"method": "GET"
+			}
+		]
+	}
+}

@@ -1,0 +1,28 @@
+{
+  "test_name": "Flash Sale Load Test",
+  "environment": "aws",
+  "timestamp": "2025-11-28T20:24:51.877789",
+  "configuration": {
+    "total_users": 500,
+    "duration_seconds": 59.80798673629761,
+    "spawn_rate": 200
+  },
+  "summary": {
+    "total_operations": 20675,
+    "success_count": 20675,
+    "failure_count": 0,
+    "success_rate_percent": 100.0,
+    "duration_seconds": 59.80798673629761,
+    "total_throughput_ops_per_sec": 345.75,
+    "avg_response_time_ms": 1270.87
+  },
+  "latency_percentiles": {
+    "min_ms": 0,
+    "p50_ms": 0,
+    "p90_ms": 0,
+    "p95_ms": 0,
+    "p99_ms": 0,
+    "max_ms": 0
+  },
+  "operation_breakdown": {}
+}

@@ -1,0 +1,11 @@
+{
+  "environment": "aws",
+  "infrastructure_up_time_seconds": 30.438893416,
+  "first_success_time_seconds": 0.121324208,
+  "total_cold_start_time_seconds": 30.438893416,
+  "first_request_attempts": 7,
+  "health_check_latency_ms": 50.889,
+  "first_create_latency_ms": 121.324,
+  "consecutive_successes": 5,
+  "timestamp": "2025-11-28T18:43:31-08:00"
+}

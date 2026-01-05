@@ -1,0 +1,11 @@
+{
+  "environment": "localstack",
+  "infrastructure_up_time_seconds": 0.005505417,
+  "first_success_time_seconds": 0.079277083,
+  "total_cold_start_time_seconds": 0.005505417,
+  "first_request_attempts": 1,
+  "health_check_latency_ms": 2.675,
+  "first_create_latency_ms": 79.277,
+  "consecutive_successes": 5,
+  "timestamp": "2025-11-28T17:15:29-08:00"
+}

@@ -1,0 +1,640 @@
+ujiezong@sujies-MacBook-Pro tests % go test -v -run TestCreateThenReadConsistency
+Successfully retrieved base URL from Terraform: http://homework7-alb-1449849009.us-west-2.elb.amazonaws.com
+Successfully retrieved base URL from Terraform: http://homework7-alb-1449849009.us-west-2.elb.amazonaws.com
+=== RUN   TestCreateThenReadConsistency
+Running Create-then-Read Consistency Test...
+    consistency_test.go:167: Cart 1761954552710158 read successfully after 78.320792ms
+    consistency_test.go:167: Cart 1761954552965060 read successfully after 31.656334ms
+    consistency_test.go:167: Cart 1761954553148361 read successfully after 35.06625ms
+    consistency_test.go:167: Cart 1761954553320811 read successfully after 32.198666ms
+    consistency_test.go:167: Cart 1761954553483021 read successfully after 27.555833ms
+    consistency_test.go:167: Cart 1761954553646169 read successfully after 30.736834ms
+    consistency_test.go:167: Cart 1761954553808338 read successfully after 22.518791ms
+    consistency_test.go:167: Cart 1761954553964266 read successfully after 30.717917ms
+    consistency_test.go:167: Cart 1761954554127823 read successfully after 26.334458ms
+    consistency_test.go:167: Cart 1761954554284522 read successfully after 35.320833ms
+    consistency_test.go:167: Cart 1761954554451452 read successfully after 31.186917ms
+    consistency_test.go:167: Cart 1761954554611962 read successfully after 43.451ms
+    consistency_test.go:167: Cart 1761954554782200 read successfully after 31.550333ms
+    consistency_test.go:167: Cart 1761954554952069 read successfully after 30.390125ms
+    consistency_test.go:167: Cart 1761954555115732 read successfully after 41.063833ms
+    consistency_test.go:167: Cart 1761954555292440 read successfully after 31.567958ms
+    consistency_test.go:167: Cart 1761954555460966 read successfully after 33.9425ms
+    consistency_test.go:167: Cart 1761954555622570 read successfully after 30.91775ms
+    consistency_test.go:167: Cart 1761954555783848 read successfully after 28.864167ms
+    consistency_test.go:167: Cart 1761954555941622 read successfully after 31.289417ms
+
+=== Consistency Metrics Report ===
+Total Attempts: 20
+Consistent Reads: 20 (100.00%)
+Inconsistent Reads: 0 (0.00%)
+Failed Reads: 0
+
+Time to Consistency:
+  Average: 34.232535ms
+  Min: 22.518791ms
+  Max: 78.320792ms
+==================================
+
+--- PASS: TestCreateThenReadConsistency (3.45s)
+PASS
+ok      tests   4.676s
+
+
+sujiezong@sujies-MacBook-Pro tests % go test -v -run "Test.*Consistency|TestRapidConcurrentU
+pdates|TestWriteReadWritePattern"
+Successfully retrieved base URL from Terraform: http://homework7-alb-1449849009.us-west-2.elb.amazonaws.com
+Successfully retrieved base URL from Terraform: http://homework7-alb-1449849009.us-west-2.elb.amazonaws.com
+=== RUN   TestCreateThenReadConsistency
+Running Create-then-Read Consistency Test...
+    consistency_test.go:167: Cart 1761954679791144 read successfully after 81.343167ms
+    consistency_test.go:167: Cart 1761954680057185 read successfully after 33.104833ms
+    consistency_test.go:167: Cart 1761954680222901 read successfully after 35.348667ms
+    consistency_test.go:167: Cart 1761954680388595 read successfully after 29.151459ms
+    consistency_test.go:167: Cart 1761954680551541 read successfully after 28.343334ms
+    consistency_test.go:167: Cart 1761954680714783 read successfully after 132.113375ms
+    consistency_test.go:167: Cart 1761954680982903 read successfully after 31.171333ms
+    consistency_test.go:167: Cart 1761954681147139 read successfully after 31.504166ms
+    consistency_test.go:167: Cart 1761954681311533 read successfully after 55.765167ms
+    consistency_test.go:167: Cart 1761954681505070 read successfully after 32.715125ms
+    consistency_test.go:167: Cart 1761954681680062 read successfully after 32.466917ms
+    consistency_test.go:167: Cart 1761954681845826 read successfully after 31.553625ms
+    consistency_test.go:167: Cart 1761954682009361 read successfully after 28.36575ms
+    consistency_test.go:167: Cart 1761954682174383 read successfully after 30.980041ms
+    consistency_test.go:167: Cart 1761954682337870 read successfully after 36.38575ms
+    consistency_test.go:167: Cart 1761954682507043 read successfully after 26.224333ms
+    consistency_test.go:167: Cart 1761954682665912 read successfully after 29.23ms
+    consistency_test.go:167: Cart 1761954682832260 read successfully after 39.096209ms
+    consistency_test.go:167: Cart 1761954683004919 read successfully after 36.376667ms
+    consistency_test.go:167: Cart 1761954683177754 read successfully after 32.62025ms
+
+=== Consistency Metrics Report ===
+Total Attempts: 20
+Consistent Reads: 20 (100.00%)
+Inconsistent Reads: 0 (0.00%)
+Failed Reads: 0
+
+Time to Consistency:
+  Average: 40.693008ms
+  Min: 26.224333ms
+  Max: 132.113375ms
+==================================
+
+--- PASS: TestCreateThenReadConsistency (3.60s)
+=== RUN   TestAddItemThenReadConsistency
+Running Add-Item-then-Read Consistency Test...
+    consistency_test.go:235: Item in cart 1761954683346179 read consistently after 72.204084ms
+    consistency_test.go:235: Item in cart 1761954683741749 read consistently after 29.084ms
+    consistency_test.go:235: Item in cart 1761954684073438 read consistently after 53.14525ms
+    consistency_test.go:235: Item in cart 1761954684412059 read consistently after 25.938791ms
+    consistency_test.go:235: Item in cart 1761954684714413 read consistently after 32.394708ms
+    consistency_test.go:235: Item in cart 1761954685043105 read consistently after 28.668958ms
+    consistency_test.go:235: Item in cart 1761954685353753 read consistently after 31.779625ms
+    consistency_test.go:235: Item in cart 1761954685662048 read consistently after 39.692083ms
+    consistency_test.go:235: Item in cart 1761954685986889 read consistently after 33.798042ms
+    consistency_test.go:235: Item in cart 1761954686299454 read consistently after 45.79375ms
+    consistency_test.go:235: Item in cart 1761954686624483 read consistently after 34.432084ms
+    consistency_test.go:235: Item in cart 1761954686950356 read consistently after 36.204875ms
+    consistency_test.go:235: Item in cart 1761954687264771 read consistently after 31.144375ms
+    consistency_test.go:235: Item in cart 1761954687575557 read consistently after 29.201833ms
+    consistency_test.go:235: Item in cart 1761954687884625 read consistently after 39.771208ms
+    consistency_test.go:235: Item in cart 1761954688202838 read consistently after 34.340542ms
+    consistency_test.go:235: Item in cart 1761954688545640 read consistently after 47.001667ms
+    consistency_test.go:235: Item in cart 1761954688875307 read consistently after 36.772709ms
+    consistency_test.go:235: Item in cart 1761954689189531 read consistently after 32.666625ms
+    consistency_test.go:235: Item in cart 1761954689509536 read consistently after 30.136959ms
+
+=== Consistency Metrics Report ===
+Total Attempts: 20
+Consistent Reads: 20 (100.00%)
+Inconsistent Reads: 0 (0.00%)
+Failed Reads: 0
+
+Time to Consistency:
+  Average: 37.208608ms
+  Min: 25.938791ms
+  Max: 72.204084ms
+==================================
+
+--- PASS: TestAddItemThenReadConsistency (6.48s)
+=== RUN   TestRapidConcurrentUpdates
+Running Rapid Concurrent Updates Test...
+    consistency_test.go:294: Writer 0: Added product 1000 with quantity 1
+    consistency_test.go:294: Writer 4: Added product 1400 with quantity 5
+    consistency_test.go:294: Writer 0: Added product 1001 with quantity 1
+    consistency_test.go:294: Writer 0: Added product 1002 with quantity 1
+    consistency_test.go:294: Writer 4: Added product 1401 with quantity 5
+    consistency_test.go:294: Writer 1: Added product 1100 with quantity 2
+    consistency_test.go:294: Writer 4: Added product 1402 with quantity 5
+    consistency_test.go:294: Writer 2: Added product 1200 with quantity 3
+    consistency_test.go:294: Writer 2: Added product 1201 with quantity 3
+    consistency_test.go:294: Writer 2: Added product 1202 with quantity 3
+    consistency_test.go:294: Writer 1: Added product 1101 with quantity 2
+    consistency_test.go:294: Writer 3: Added product 1300 with quantity 4
+    consistency_test.go:294: Writer 1: Added product 1102 with quantity 2
+    consistency_test.go:294: Writer 3: Added product 1301 with quantity 4
+    consistency_test.go:294: Writer 3: Added product 1302 with quantity 4
+
+Reading cart state multiple times...
+    consistency_test.go:310: Read 1: Cart has 15 items
+    consistency_test.go:319:   - Product 1000: Quantity 1
+    consistency_test.go:319:   - Product 1400: Quantity 5
+    consistency_test.go:319:   - Product 1001: Quantity 1
+    consistency_test.go:319:   - Product 1002: Quantity 1
+    consistency_test.go:319:   - Product 1401: Quantity 5
+    consistency_test.go:319:   - Product 1100: Quantity 2
+    consistency_test.go:319:   - Product 1402: Quantity 5
+    consistency_test.go:319:   - Product 1200: Quantity 3
+    consistency_test.go:319:   - Product 1201: Quantity 3
+    consistency_test.go:319:   - Product 1202: Quantity 3
+    consistency_test.go:319:   - Product 1101: Quantity 2
+    consistency_test.go:319:   - Product 1300: Quantity 4
+    consistency_test.go:319:   - Product 1102: Quantity 2
+    consistency_test.go:319:   - Product 1301: Quantity 4
+    consistency_test.go:319:   - Product 1302: Quantity 4
+    consistency_test.go:310: Read 2: Cart has 15 items
+    consistency_test.go:319:   - Product 1000: Quantity 1
+    consistency_test.go:319:   - Product 1400: Quantity 5
+    consistency_test.go:319:   - Product 1001: Quantity 1
+    consistency_test.go:319:   - Product 1002: Quantity 1
+    consistency_test.go:319:   - Product 1401: Quantity 5
+    consistency_test.go:319:   - Product 1100: Quantity 2
+    consistency_test.go:319:   - Product 1402: Quantity 5
+    consistency_test.go:319:   - Product 1200: Quantity 3
+    consistency_test.go:319:   - Product 1201: Quantity 3
+    consistency_test.go:319:   - Product 1202: Quantity 3
+    consistency_test.go:319:   - Product 1101: Quantity 2
+    consistency_test.go:319:   - Product 1300: Quantity 4
+    consistency_test.go:319:   - Product 1102: Quantity 2
+    consistency_test.go:319:   - Product 1301: Quantity 4
+    consistency_test.go:319:   - Product 1302: Quantity 4
+    consistency_test.go:310: Read 3: Cart has 15 items
+    consistency_test.go:319:   - Product 1000: Quantity 1
+    consistency_test.go:319:   - Product 1400: Quantity 5
+    consistency_test.go:319:   - Product 1001: Quantity 1
+    consistency_test.go:319:   - Product 1002: Quantity 1
+    consistency_test.go:319:   - Product 1401: Quantity 5
+    consistency_test.go:319:   - Product 1100: Quantity 2
+    consistency_test.go:319:   - Product 1402: Quantity 5
+    consistency_test.go:319:   - Product 1200: Quantity 3
+    consistency_test.go:319:   - Product 1201: Quantity 3
+    consistency_test.go:319:   - Product 1202: Quantity 3
+    consistency_test.go:319:   - Product 1101: Quantity 2
+    consistency_test.go:319:   - Product 1300: Quantity 4
+    consistency_test.go:319:   - Product 1102: Quantity 2
+    consistency_test.go:319:   - Product 1301: Quantity 4
+    consistency_test.go:319:   - Product 1302: Quantity 4
+    consistency_test.go:310: Read 4: Cart has 15 items
+    consistency_test.go:319:   - Product 1000: Quantity 1
+    consistency_test.go:319:   - Product 1400: Quantity 5
+    consistency_test.go:319:   - Product 1001: Quantity 1
+    consistency_test.go:319:   - Product 1002: Quantity 1
+    consistency_test.go:319:   - Product 1401: Quantity 5
+    consistency_test.go:319:   - Product 1100: Quantity 2
+    consistency_test.go:319:   - Product 1402: Quantity 5
+    consistency_test.go:319:   - Product 1200: Quantity 3
+    consistency_test.go:319:   - Product 1201: Quantity 3
+    consistency_test.go:319:   - Product 1202: Quantity 3
+    consistency_test.go:319:   - Product 1101: Quantity 2
+    consistency_test.go:319:   - Product 1300: Quantity 4
+    consistency_test.go:319:   - Product 1102: Quantity 2
+    consistency_test.go:319:   - Product 1301: Quantity 4
+    consistency_test.go:319:   - Product 1302: Quantity 4
+    consistency_test.go:310: Read 5: Cart has 15 items
+    consistency_test.go:319:   - Product 1000: Quantity 1
+    consistency_test.go:319:   - Product 1400: Quantity 5
+    consistency_test.go:319:   - Product 1001: Quantity 1
+    consistency_test.go:319:   - Product 1002: Quantity 1
+    consistency_test.go:319:   - Product 1401: Quantity 5
+    consistency_test.go:319:   - Product 1100: Quantity 2
+    consistency_test.go:319:   - Product 1402: Quantity 5
+    consistency_test.go:319:   - Product 1200: Quantity 3
+    consistency_test.go:319:   - Product 1201: Quantity 3
+    consistency_test.go:319:   - Product 1202: Quantity 3
+    consistency_test.go:319:   - Product 1101: Quantity 2
+    consistency_test.go:319:   - Product 1300: Quantity 4
+    consistency_test.go:319:   - Product 1102: Quantity 2
+    consistency_test.go:319:   - Product 1301: Quantity 4
+    consistency_test.go:319:   - Product 1302: Quantity 4
+    consistency_test.go:310: Read 6: Cart has 15 items
+    consistency_test.go:319:   - Product 1000: Quantity 1
+    consistency_test.go:319:   - Product 1400: Quantity 5
+    consistency_test.go:319:   - Product 1001: Quantity 1
+    consistency_test.go:319:   - Product 1002: Quantity 1
+    consistency_test.go:319:   - Product 1401: Quantity 5
+    consistency_test.go:319:   - Product 1100: Quantity 2
+    consistency_test.go:319:   - Product 1402: Quantity 5
+    consistency_test.go:319:   - Product 1200: Quantity 3
+    consistency_test.go:319:   - Product 1201: Quantity 3
+    consistency_test.go:319:   - Product 1202: Quantity 3
+    consistency_test.go:319:   - Product 1101: Quantity 2
+    consistency_test.go:319:   - Product 1300: Quantity 4
+    consistency_test.go:319:   - Product 1102: Quantity 2
+    consistency_test.go:319:   - Product 1301: Quantity 4
+    consistency_test.go:319:   - Product 1302: Quantity 4
+    consistency_test.go:310: Read 7: Cart has 15 items
+    consistency_test.go:319:   - Product 1000: Quantity 1
+    consistency_test.go:319:   - Product 1400: Quantity 5
+    consistency_test.go:319:   - Product 1001: Quantity 1
+    consistency_test.go:319:   - Product 1002: Quantity 1
+    consistency_test.go:319:   - Product 1401: Quantity 5
+    consistency_test.go:319:   - Product 1100: Quantity 2
+    consistency_test.go:319:   - Product 1402: Quantity 5
+    consistency_test.go:319:   - Product 1200: Quantity 3
+    consistency_test.go:319:   - Product 1201: Quantity 3
+    consistency_test.go:319:   - Product 1202: Quantity 3
+    consistency_test.go:319:   - Product 1101: Quantity 2
+    consistency_test.go:319:   - Product 1300: Quantity 4
+    consistency_test.go:319:   - Product 1102: Quantity 2
+    consistency_test.go:319:   - Product 1301: Quantity 4
+    consistency_test.go:319:   - Product 1302: Quantity 4
+    consistency_test.go:310: Read 8: Cart has 15 items
+    consistency_test.go:319:   - Product 1000: Quantity 1
+    consistency_test.go:319:   - Product 1400: Quantity 5
+    consistency_test.go:319:   - Product 1001: Quantity 1
+    consistency_test.go:319:   - Product 1002: Quantity 1
+    consistency_test.go:319:   - Product 1401: Quantity 5
+    consistency_test.go:319:   - Product 1100: Quantity 2
+    consistency_test.go:319:   - Product 1402: Quantity 5
+    consistency_test.go:319:   - Product 1200: Quantity 3
+    consistency_test.go:319:   - Product 1201: Quantity 3
+    consistency_test.go:319:   - Product 1202: Quantity 3
+    consistency_test.go:319:   - Product 1101: Quantity 2
+    consistency_test.go:319:   - Product 1300: Quantity 4
+    consistency_test.go:319:   - Product 1102: Quantity 2
+    consistency_test.go:319:   - Product 1301: Quantity 4
+    consistency_test.go:319:   - Product 1302: Quantity 4
+    consistency_test.go:310: Read 9: Cart has 15 items
+    consistency_test.go:319:   - Product 1000: Quantity 1
+    consistency_test.go:319:   - Product 1400: Quantity 5
+    consistency_test.go:319:   - Product 1001: Quantity 1
+    consistency_test.go:319:   - Product 1002: Quantity 1
+    consistency_test.go:319:   - Product 1401: Quantity 5
+    consistency_test.go:319:   - Product 1100: Quantity 2
+    consistency_test.go:319:   - Product 1402: Quantity 5
+    consistency_test.go:319:   - Product 1200: Quantity 3
+    consistency_test.go:319:   - Product 1201: Quantity 3
+    consistency_test.go:319:   - Product 1202: Quantity 3
+    consistency_test.go:319:   - Product 1101: Quantity 2
+    consistency_test.go:319:   - Product 1300: Quantity 4
+    consistency_test.go:319:   - Product 1102: Quantity 2
+    consistency_test.go:319:   - Product 1301: Quantity 4
+    consistency_test.go:319:   - Product 1302: Quantity 4
+    consistency_test.go:310: Read 10: Cart has 15 items
+    consistency_test.go:319:   - Product 1000: Quantity 1
+    consistency_test.go:319:   - Product 1400: Quantity 5
+    consistency_test.go:319:   - Product 1001: Quantity 1
+    consistency_test.go:319:   - Product 1002: Quantity 1
+    consistency_test.go:319:   - Product 1401: Quantity 5
+    consistency_test.go:319:   - Product 1100: Quantity 2
+    consistency_test.go:319:   - Product 1402: Quantity 5
+    consistency_test.go:319:   - Product 1200: Quantity 3
+    consistency_test.go:319:   - Product 1201: Quantity 3
+    consistency_test.go:319:   - Product 1202: Quantity 3
+    consistency_test.go:319:   - Product 1101: Quantity 2
+    consistency_test.go:319:   - Product 1300: Quantity 4
+    consistency_test.go:319:   - Product 1102: Quantity 2
+    consistency_test.go:319:   - Product 1301: Quantity 4
+    consistency_test.go:319:   - Product 1302: Quantity 4
+    consistency_test.go:325: 
+        Consistent consecutive reads: 9/9
+--- PASS: TestRapidConcurrentUpdates (2.63s)
+=== RUN   TestWriteReadWritePattern
+Running Write-Read-Write Pattern Test...
+    consistency_test.go:360: Current quantity for product 500: 10
+    consistency_test.go:384: Final quantity for product 500: 15 (expected: 15)
+--- PASS: TestWriteReadWritePattern (0.63s)
+PASS
+ok      tests   14.503s
+
+./run-local.sh  1.17s user 0.74s system 1% cpu 1:48.06 total
+sujiezong@sujies-MacBook-Pro tests % go test -v -run TestColdStart -timeout 5m
+Using BASE_URL from environment variable: http://localhost:8080
+Using BASE_URL from environment variable: http://localhost:8080
+Using BASE_URL from environment variable: http://localhost:8080
+Using BASE_URL from environment variable: http://localhost:8080
+Using BASE_URL from environment variable: http://localhost:8080
+=== RUN   TestColdStart
+
+╔════════════════════════════════════════╗
+║      COLD START MEASUREMENT TEST      ║
+╚════════════════════════════════════════╝
+
+Base URL: http://localhost:8080
+
+NOTE: This test should be run immediately after:
+  - AWS: terraform apply / azd up
+  - LocalStack: docker-compose up
+
+Waiting for service to become ready...
+Attempt 1/60... ✓ Success after 0.01 seconds
+
+Attempting first create cart request...
+✓ First request succeeded (79.28 ms)
+
+Verifying stability with 5 consecutive requests...
+  Request 1: ✓
+  Request 2: ✓
+  Request 3: ✓
+  Request 4: ✓
+  Request 5: ✓
+Stability: 5/5 successful
+
+
+╔════════════════════════════════════════════════════════════════╗
+║                  COLD START SUMMARY                           ║
+╚════════════════════════════════════════════════════════════════╝
+
+Environment: localstack
+Infrastructure Up Time: 0.01 seconds
+Time to First Successful Request: 0.08 seconds
+Total Cold Start Time: 0.01 seconds
+Attempts Until Ready: 1
+Health Check Latency: 2.67 ms
+First Create Latency: 79.28 ms
+Consecutive Successes: 5/5
+
+✓ Results saved to: cold_start_localstack_results.json
+--- PASS: TestColdStart (0.66s)
+PASS
+ok      tests   2.863s
+sujiezong@sujies-MacBook-Pro tests % 
+
+sujiezong@sujies-MacBook-Pro tests % go test -v -run TestCreateThenReadConsistency -timeout 10m
+go test -v -run TestAddItemThenReadConsistency -timeout 10m
+go test -v -run TestRapidConcurrentUpdates -timeout 10m
+Successfully retrieved base URL from Terraform: http://dynamodb-homework7-alb-416581147.us-west-2.elb.amazonaws.com
+Successfully retrieved base URL from Terraform: http://dynamodb-homework7-alb-416581147.us-west-2.elb.amazonaws.com
+Successfully retrieved base URL from Terraform: http://dynamodb-homework7-alb-416581147.us-west-2.elb.amazonaws.com
+Successfully retrieved base URL from Terraform: http://dynamodb-homework7-alb-416581147.us-west-2.elb.amazonaws.com
+Successfully retrieved base URL from Terraform: http://dynamodb-homework7-alb-416581147.us-west-2.elb.amazonaws.com
+=== RUN   TestCreateThenReadConsistency
+Running Create-then-Read Consistency Test...
+    consistency_test.go:169: Cart 1764383201549523 read successfully after 89.850458ms
+    consistency_test.go:169: Cart 1764383201825801 read successfully after 29.286958ms
+    consistency_test.go:169: Cart 1764383201986993 read successfully after 32.813792ms
+    consistency_test.go:169: Cart 1764383202150653 read successfully after 26.143875ms
+    consistency_test.go:169: Cart 1764383202306090 read successfully after 30.583125ms
+    consistency_test.go:169: Cart 1764383202468203 read successfully after 29.917542ms
+    consistency_test.go:169: Cart 1764383202632100 read successfully after 34.717ms
+    consistency_test.go:169: Cart 1764383202801770 read successfully after 29.681584ms
+    consistency_test.go:169: Cart 1764383202967221 read successfully after 29.961542ms
+    consistency_test.go:169: Cart 1764383203132683 read successfully after 29.4975ms
+    consistency_test.go:169: Cart 1764383203290305 read successfully after 29.028292ms
+    consistency_test.go:169: Cart 1764383203447395 read successfully after 29.453084ms
+    consistency_test.go:169: Cart 1764383203607086 read successfully after 28.996542ms
+    consistency_test.go:169: Cart 1764383203770844 read successfully after 30.096292ms
+    consistency_test.go:169: Cart 1764383203930151 read successfully after 38.075625ms
+    consistency_test.go:169: Cart 1764383204096755 read successfully after 29.6925ms
+    consistency_test.go:169: Cart 1764383204256540 read successfully after 29.280375ms
+    consistency_test.go:169: Cart 1764383204415126 read successfully after 29.199375ms
+    consistency_test.go:169: Cart 1764383204573076 read successfully after 58.607083ms
+    consistency_test.go:169: Cart 1764383204760631 read successfully after 26.002125ms
+
+=== Consistency Metrics Report ===
+Total Attempts: 20
+Consistent Reads: 20 (100.00%)
+Inconsistent Reads: 0 (0.00%)
+Failed Reads: 0
+
+Time to Consistency:
+  Average: 34.544233ms
+  Min: 26.002125ms
+  Max: 89.850458ms
+==================================
+
+--- PASS: TestCreateThenReadConsistency (3.42s)
+PASS
+ok      tests   5.660s
+Successfully retrieved base URL from Terraform: http://dynamodb-homework7-alb-416581147.us-west-2.elb.amazonaws.com
+Successfully retrieved base URL from Terraform: http://dynamodb-homework7-alb-416581147.us-west-2.elb.amazonaws.com
+Successfully retrieved base URL from Terraform: http://dynamodb-homework7-alb-416581147.us-west-2.elb.amazonaws.com
+Successfully retrieved base URL from Terraform: http://dynamodb-homework7-alb-416581147.us-west-2.elb.amazonaws.com
+Successfully retrieved base URL from Terraform: http://dynamodb-homework7-alb-416581147.us-west-2.elb.amazonaws.com
+=== RUN   TestAddItemThenReadConsistency
+Running Add-Item-then-Read Consistency Test...
+    consistency_test.go:237: Item in cart 1764383207157397 read consistently after 75.474667ms
+    consistency_test.go:237: Item in cart 1764383207558882 read consistently after 30.375ms
+    consistency_test.go:237: Item in cart 1764383207880125 read consistently after 49.752291ms
+    consistency_test.go:237: Item in cart 1764383208210981 read consistently after 29.208041ms
+    consistency_test.go:237: Item in cart 1764383208516622 read consistently after 30.63925ms
+    consistency_test.go:237: Item in cart 1764383208851949 read consistently after 37.740292ms
+    consistency_test.go:237: Item in cart 1764383209178190 read consistently after 30.526458ms
+    consistency_test.go:237: Item in cart 1764383209490443 read consistently after 35.800542ms
+    consistency_test.go:237: Item in cart 1764383209864840 read consistently after 33.776459ms
+    consistency_test.go:237: Item in cart 1764383210174651 read consistently after 30.861542ms
+    consistency_test.go:237: Item in cart 1764383210487113 read consistently after 32.197125ms
+    consistency_test.go:237: Item in cart 1764383210831472 read consistently after 32.063708ms
+    consistency_test.go:237: Item in cart 1764383211144019 read consistently after 31.061584ms
+    consistency_test.go:237: Item in cart 1764383211452523 read consistently after 30.03125ms
+    consistency_test.go:237: Item in cart 1764383211762383 read consistently after 30.644959ms
+    consistency_test.go:237: Item in cart 1764383212072136 read consistently after 31.197583ms
+    consistency_test.go:237: Item in cart 1764383212382017 read consistently after 30.504625ms
+    consistency_test.go:237: Item in cart 1764383212692189 read consistently after 32.336792ms
+    consistency_test.go:237: Item in cart 1764383213005967 read consistently after 30.093583ms
+    consistency_test.go:237: Item in cart 1764383213313940 read consistently after 32.456916ms
+
+=== Consistency Metrics Report ===
+Total Attempts: 20
+Consistent Reads: 20 (100.00%)
+Inconsistent Reads: 0 (0.00%)
+Failed Reads: 0
+
+Time to Consistency:
+  Average: 34.837133ms
+  Min: 29.208041ms
+  Max: 75.474667ms
+==================================
+
+--- PASS: TestAddItemThenReadConsistency (6.52s)
+PASS
+ok      tests   8.466s
+Successfully retrieved base URL from Terraform: http://dynamodb-homework7-alb-416581147.us-west-2.elb.amazonaws.com
+Successfully retrieved base URL from Terraform: http://dynamodb-homework7-alb-416581147.us-west-2.elb.amazonaws.com
+Successfully retrieved base URL from Terraform: http://dynamodb-homework7-alb-416581147.us-west-2.elb.amazonaws.com
+Successfully retrieved base URL from Terraform: http://dynamodb-homework7-alb-416581147.us-west-2.elb.amazonaws.com
+Successfully retrieved base URL from Terraform: http://dynamodb-homework7-alb-416581147.us-west-2.elb.amazonaws.com
+=== RUN   TestRapidConcurrentUpdates
+Running Rapid Concurrent Updates Test...
+    consistency_test.go:296: Writer 1: Added product 1100 with quantity 2
+    consistency_test.go:296: Writer 1: Added product 1101 with quantity 2
+    consistency_test.go:296: Writer 1: Added product 1102 with quantity 2
+    consistency_test.go:296: Writer 2: Added product 1200 with quantity 3
+    consistency_test.go:296: Writer 3: Added product 1300 with quantity 4
+    consistency_test.go:296: Writer 4: Added product 1400 with quantity 5
+    consistency_test.go:296: Writer 2: Added product 1201 with quantity 3
+    consistency_test.go:296: Writer 4: Added product 1401 with quantity 5
+    consistency_test.go:296: Writer 2: Added product 1202 with quantity 3
+    consistency_test.go:296: Writer 4: Added product 1402 with quantity 5
+    consistency_test.go:296: Writer 3: Added product 1301 with quantity 4
+    consistency_test.go:296: Writer 0: Added product 1000 with quantity 1
+    consistency_test.go:296: Writer 3: Added product 1302 with quantity 4
+    consistency_test.go:296: Writer 0: Added product 1001 with quantity 1
+    consistency_test.go:296: Writer 0: Added product 1002 with quantity 1
+
+Reading cart state multiple times...
+    consistency_test.go:312: Read 1: Cart has 15 items
+    consistency_test.go:321:   - Product 1100: Quantity 2
+    consistency_test.go:321:   - Product 1101: Quantity 2
+    consistency_test.go:321:   - Product 1102: Quantity 2
+    consistency_test.go:321:   - Product 1200: Quantity 3
+    consistency_test.go:321:   - Product 1300: Quantity 4
+    consistency_test.go:321:   - Product 1400: Quantity 5
+    consistency_test.go:321:   - Product 1201: Quantity 3
+    consistency_test.go:321:   - Product 1401: Quantity 5
+    consistency_test.go:321:   - Product 1202: Quantity 3
+    consistency_test.go:321:   - Product 1402: Quantity 5
+    consistency_test.go:321:   - Product 1301: Quantity 4
+    consistency_test.go:321:   - Product 1000: Quantity 1
+    consistency_test.go:321:   - Product 1302: Quantity 4
+    consistency_test.go:321:   - Product 1001: Quantity 1
+    consistency_test.go:321:   - Product 1002: Quantity 1
+    consistency_test.go:312: Read 2: Cart has 15 items
+    consistency_test.go:321:   - Product 1100: Quantity 2
+    consistency_test.go:321:   - Product 1101: Quantity 2
+    consistency_test.go:321:   - Product 1102: Quantity 2
+    consistency_test.go:321:   - Product 1200: Quantity 3
+    consistency_test.go:321:   - Product 1300: Quantity 4
+    consistency_test.go:321:   - Product 1400: Quantity 5
+    consistency_test.go:321:   - Product 1201: Quantity 3
+    consistency_test.go:321:   - Product 1401: Quantity 5
+    consistency_test.go:321:   - Product 1202: Quantity 3
+    consistency_test.go:321:   - Product 1402: Quantity 5
+    consistency_test.go:321:   - Product 1301: Quantity 4
+    consistency_test.go:321:   - Product 1000: Quantity 1
+    consistency_test.go:321:   - Product 1302: Quantity 4
+    consistency_test.go:321:   - Product 1001: Quantity 1
+    consistency_test.go:321:   - Product 1002: Quantity 1
+    consistency_test.go:312: Read 3: Cart has 15 items
+    consistency_test.go:321:   - Product 1100: Quantity 2
+    consistency_test.go:321:   - Product 1101: Quantity 2
+    consistency_test.go:321:   - Product 1102: Quantity 2
+    consistency_test.go:321:   - Product 1200: Quantity 3
+    consistency_test.go:321:   - Product 1300: Quantity 4
+    consistency_test.go:321:   - Product 1400: Quantity 5
+    consistency_test.go:321:   - Product 1201: Quantity 3
+    consistency_test.go:321:   - Product 1401: Quantity 5
+    consistency_test.go:321:   - Product 1202: Quantity 3
+    consistency_test.go:321:   - Product 1402: Quantity 5
+    consistency_test.go:321:   - Product 1301: Quantity 4
+    consistency_test.go:321:   - Product 1000: Quantity 1
+    consistency_test.go:321:   - Product 1302: Quantity 4
+    consistency_test.go:321:   - Product 1001: Quantity 1
+    consistency_test.go:321:   - Product 1002: Quantity 1
+    consistency_test.go:312: Read 4: Cart has 15 items
+    consistency_test.go:321:   - Product 1100: Quantity 2
+    consistency_test.go:321:   - Product 1101: Quantity 2
+    consistency_test.go:321:   - Product 1102: Quantity 2
+    consistency_test.go:321:   - Product 1200: Quantity 3
+    consistency_test.go:321:   - Product 1300: Quantity 4
+    consistency_test.go:321:   - Product 1400: Quantity 5
+    consistency_test.go:321:   - Product 1201: Quantity 3
+    consistency_test.go:321:   - Product 1401: Quantity 5
+    consistency_test.go:321:   - Product 1202: Quantity 3
+    consistency_test.go:321:   - Product 1402: Quantity 5
+    consistency_test.go:321:   - Product 1301: Quantity 4
+    consistency_test.go:321:   - Product 1000: Quantity 1
+    consistency_test.go:321:   - Product 1302: Quantity 4
+    consistency_test.go:321:   - Product 1001: Quantity 1
+    consistency_test.go:321:   - Product 1002: Quantity 1
+    consistency_test.go:312: Read 5: Cart has 15 items
+    consistency_test.go:321:   - Product 1100: Quantity 2
+    consistency_test.go:321:   - Product 1101: Quantity 2
+    consistency_test.go:321:   - Product 1102: Quantity 2
+    consistency_test.go:321:   - Product 1200: Quantity 3
+    consistency_test.go:321:   - Product 1300: Quantity 4
+    consistency_test.go:321:   - Product 1400: Quantity 5
+    consistency_test.go:321:   - Product 1201: Quantity 3
+    consistency_test.go:321:   - Product 1401: Quantity 5
+    consistency_test.go:321:   - Product 1202: Quantity 3
+    consistency_test.go:321:   - Product 1402: Quantity 5
+    consistency_test.go:321:   - Product 1301: Quantity 4
+    consistency_test.go:321:   - Product 1000: Quantity 1
+    consistency_test.go:321:   - Product 1302: Quantity 4
+    consistency_test.go:321:   - Product 1001: Quantity 1
+    consistency_test.go:321:   - Product 1002: Quantity 1
+    consistency_test.go:312: Read 6: Cart has 15 items
+    consistency_test.go:321:   - Product 1100: Quantity 2
+    consistency_test.go:321:   - Product 1101: Quantity 2
+    consistency_test.go:321:   - Product 1102: Quantity 2
+    consistency_test.go:321:   - Product 1200: Quantity 3
+    consistency_test.go:321:   - Product 1300: Quantity 4
+    consistency_test.go:321:   - Product 1400: Quantity 5
+    consistency_test.go:321:   - Product 1201: Quantity 3
+    consistency_test.go:321:   - Product 1401: Quantity 5
+    consistency_test.go:321:   - Product 1202: Quantity 3
+    consistency_test.go:321:   - Product 1402: Quantity 5
+    consistency_test.go:321:   - Product 1301: Quantity 4
+    consistency_test.go:321:   - Product 1000: Quantity 1
+    consistency_test.go:321:   - Product 1302: Quantity 4
+    consistency_test.go:321:   - Product 1001: Quantity 1
+    consistency_test.go:321:   - Product 1002: Quantity 1
+    consistency_test.go:312: Read 7: Cart has 15 items
+    consistency_test.go:321:   - Product 1100: Quantity 2
+    consistency_test.go:321:   - Product 1101: Quantity 2
+    consistency_test.go:321:   - Product 1102: Quantity 2
+    consistency_test.go:321:   - Product 1200: Quantity 3
+    consistency_test.go:321:   - Product 1300: Quantity 4
+    consistency_test.go:321:   - Product 1400: Quantity 5
+    consistency_test.go:321:   - Product 1201: Quantity 3
+    consistency_test.go:321:   - Product 1401: Quantity 5
+    consistency_test.go:321:   - Product 1202: Quantity 3
+    consistency_test.go:321:   - Product 1402: Quantity 5
+    consistency_test.go:321:   - Product 1301: Quantity 4
+    consistency_test.go:321:   - Product 1000: Quantity 1
+    consistency_test.go:321:   - Product 1302: Quantity 4
+    consistency_test.go:321:   - Product 1001: Quantity 1
+    consistency_test.go:321:   - Product 1002: Quantity 1
+    consistency_test.go:312: Read 8: Cart has 15 items
+    consistency_test.go:321:   - Product 1100: Quantity 2
+    consistency_test.go:321:   - Product 1101: Quantity 2
+    consistency_test.go:321:   - Product 1102: Quantity 2
+    consistency_test.go:321:   - Product 1200: Quantity 3
+    consistency_test.go:321:   - Product 1300: Quantity 4
+    consistency_test.go:321:   - Product 1400: Quantity 5
+    consistency_test.go:321:   - Product 1201: Quantity 3
+    consistency_test.go:321:   - Product 1401: Quantity 5
+    consistency_test.go:321:   - Product 1202: Quantity 3
+    consistency_test.go:321:   - Product 1402: Quantity 5
+    consistency_test.go:321:   - Product 1301: Quantity 4
+    consistency_test.go:321:   - Product 1000: Quantity 1
+    consistency_test.go:321:   - Product 1302: Quantity 4
+    consistency_test.go:321:   - Product 1001: Quantity 1
+    consistency_test.go:321:   - Product 1002: Quantity 1
+    consistency_test.go:312: Read 9: Cart has 15 items
+    consistency_test.go:321:   - Product 1100: Quantity 2
+    consistency_test.go:321:   - Product 1101: Quantity 2
+    consistency_test.go:321:   - Product 1102: Quantity 2
+    consistency_test.go:321:   - Product 1200: Quantity 3
+    consistency_test.go:321:   - Product 1300: Quantity 4
+    consistency_test.go:321:   - Product 1400: Quantity 5
+    consistency_test.go:321:   - Product 1201: Quantity 3
+    consistency_test.go:321:   - Product 1401: Quantity 5
+    consistency_test.go:321:   - Product 1202: Quantity 3
+    consistency_test.go:321:   - Product 1402: Quantity 5
+    consistency_test.go:321:   - Product 1301: Quantity 4
+    consistency_test.go:321:   - Product 1000: Quantity 1
+    consistency_test.go:321:   - Product 1302: Quantity 4
+    consistency_test.go:321:   - Product 1001: Quantity 1
+    consistency_test.go:321:   - Product 1002: Quantity 1
+    consistency_test.go:312: Read 10: Cart has 15 items
+    consistency_test.go:321:   - Product 1100: Quantity 2
+    consistency_test.go:321:   - Product 1101: Quantity 2
+    consistency_test.go:321:   - Product 1102: Quantity 2
+    consistency_test.go:321:   - Product 1200: Quantity 3
+    consistency_test.go:321:   - Product 1300: Quantity 4
+    consistency_test.go:321:   - Product 1400: Quantity 5
+    consistency_test.go:321:   - Product 1201: Quantity 3
+    consistency_test.go:321:   - Product 1401: Quantity 5
+    consistency_test.go:321:   - Product 1202: Quantity 3
+    consistency_test.go:321:   - Product 1402: Quantity 5
+    consistency_test.go:321:   - Product 1301: Quantity 4
+    consistency_test.go:321:   - Product 1000: Quantity 1
+    consistency_test.go:321:   - Product 1302: Quantity 4
+    consistency_test.go:321:   - Product 1001: Quantity 1
+    consistency_test.go:321:   - Product 1002: Quantity 1
+    consistency_test.go:327: 
+        Consistent consecutive reads: 9/9
+--- PASS: TestRapidConcurrentUpdates (2.66s)
+PASS
+ok      tests   4.563s

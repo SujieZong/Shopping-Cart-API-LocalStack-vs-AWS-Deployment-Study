@@ -1,0 +1,79 @@
+version: "3.8"
+
+services:
+  localstack:
+    image: localstack/localstack-pro:latest
+    container_name: shopping-cart-localstack
+    ports:
+      - "4566:4566" # LocalStack gateway
+      - "4510-4559:4510-4559" # External services port range
+    environment:
+      # LocalStack Pro Configuration
+      - LOCALSTACK_AUTH_TOKEN=${LOCALSTACK_AUTH_TOKEN}
+      - DEBUG=1
+      - LS_LOG=debug
+      - SERVICES=rds
+      - RDS_MYSQL_DOCKER=1
+      - PERSISTENCE=1
+
+      # AWS Configuration
+      - AWS_DEFAULT_REGION=us-west-2
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+    volumes:
+      - "./localstack-data:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - shopping-cart-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4566/_localstack/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: ./src
+      dockerfile: Dockerfile
+    container_name: shopping-cart-api
+    environment:
+      # RDS endpoint - LocalStack creates a separate MySQL container
+      # DB_HOST and external_links are set dynamically via docker-compose.localstack.override.yml
+      DB_PORT: 3306
+      DB_USER: admin
+      DB_PASSWORD: MySecurePass123!
+      DB_NAME: shopping_cart_db
+      PORT: 3000
+
+      # AWS Configuration for LocalStack
+      AWS_ENDPOINT_URL: http://localstack:4566
+      AWS_ACCESS_KEY_ID: test
+      AWS_SECRET_ACCESS_KEY: test
+      AWS_REGION: us-west-2
+    ports:
+      - "3000:3000"
+    depends_on:
+      localstack:
+        condition: service_healthy
+    networks:
+      - shopping-cart-network
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--no-verbose",
+          "--tries=1",
+          "--spider",
+          "http://localhost:3000/health",
+        ]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+
+networks:
+  shopping-cart-network:
+    driver: bridge
+
+volumes:
+  localstack_data:

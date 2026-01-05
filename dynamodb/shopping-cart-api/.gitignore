@@ -1,0 +1,50 @@
+# Binaries
+shopping-cart-api
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool
+*.out
+
+# Dependency directories
+vendor/
+
+# Go workspace file
+go.work
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+
+# AWS
+.aws/
+# Terraform state files (binary snapshots - DO NOT COMMIT)
+terraform/*.tfstate
+terraform/*.tfstate.*
+terraform/.terraform/
+terraform/.terraform.lock.hcl
+terraform/tfplan
+terraform/*.tfplan
+
+# LocalStack persistent data
+localstack-data/
+
+# Test result directories (large data files)
+flash_sale_results_*/

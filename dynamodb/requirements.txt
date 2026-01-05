@@ -1,0 +1,146 @@
+STEP II: DynamoDB Integration instead of NoSQL
+Next, you will implement identical shopping cart functionality using DynamoDB, allowing direct comparison of SQL vs NoSQL approaches using the same API specification you've defined above.
+
+Building on your MySQL implementation, implement the same shopping cart functionality using Amazon DynamoDB. You'll explore NoSQL concepts, partition key strategies, and eventual consistency while maintaining API compatibility with STEP I.
+
+Learning Objectives
+Understand NoSQL concepts and DynamoDB's data model
+Design effective partition key strategies for scalable access patterns
+Implement DynamoDB operations with the AWS SDK
+Handle eventual consistency in distributed NoSQL systems
+Compare NoSQL performance characteristics with SQL databases
+Part 1: DynamoDB Table Design Challenge
+Extend STEP I Infrastructure
+Add DynamoDB tables to your existing Terraform configuration while keeping MySQL for comparison.
+
+NoSQL Access Pattern Analysis
+Shopping carts are ideal for NoSQL because:
+
+Simple access patterns: Create cart, retrieve by ID, add/update items
+No complex queries or joins needed
+High write volume with frequent cart updates
+Session-based data with natural expiration
+DynamoDB Design Constraints and Access Patterns
+Access Patterns Your Design Must Support:
+
+Retrieve Specific Cart: Get cart by cart ID quickly (<50ms)
+Update Cart Items: Add or modify items in existing cart efficiently
+Create New Cart: Generate new cart with customer information
+Support Comparison: Enable fair performance comparison with STEP I MySQL
+Design Constraints:
+
+Even Distribution: No hot partitions under normal shopping load
+Cost Efficiency: Minimize read/write capacity consumption
+Scalability: Design should work with millions of carts
+Consistency: Handle the shopping cart use case with eventual consistency
+Your Design Decisions:
+
+Partition Key Strategy: What key ensures even distribution?
+Sort Key Need: Do you need a sort key for any operations?
+Table Structure: Single table vs multiple tables?
+Attribute Design: How to handle cart items (embedded vs separate)?
+Index Strategy: Any secondary indexes needed?
+Document Your Approach:
+
+Why you chose your partition key
+How you handle the cart-item relationship
+How your design compares to the MySQL approach from STEP I
+Any trade-offs you identified
+Document Your Learning Journey: Include what you discover during DynamoDB design, what approaches you tried first, and how you validated your design choices.
+
+Part 2: API Implementation
+Implement Shopping Cart API from STEP I
+Reference: Use the exact same API specification you defined in STEP I:
+
+POST /shopping-carts - Create new cart
+GET /shopping-carts/{id} - Retrieve cart with items
+POST /shopping-carts/{id}/items - Add/update items
+NoSQL Implementation Focus:
+
+AWS SDK integration with proper error handling
+DynamoDB attribute value formatting
+Partition key usage in all operations
+Handling DynamoDB-specific exceptions
+Investigation Questions:
+
+How does DynamoDB's attribute value format affect your application data structures?
+What DynamoDB operations (PutItem, GetItem, Query) are most appropriate for each endpoint?
+How do you handle eventual consistency in your operations?
+Part 3: Eventual Consistency Investigation
+Design Consistency Tests
+Testing Objectives:
+
+Observe read-after-write consistency behavior
+Measure how quickly consistency is achieved
+Document how eventual consistency affects user experience
+Test Scenarios:
+
+Create cart then immediately retrieve it
+Add item then immediately fetch cart items
+Rapid updates to the same cart from multiple clients
+Investigation Questions:
+
+How frequently do you observe eventual consistency delays?
+What application patterns are most affected by consistency delays?
+How can you design your application to handle consistency gracefully?
+Part 4: Required Identical Testing
+CRITICAL: Use Exact Same Test as STEP I
+Critical Test Consistency Requirements:
+
+Use IDENTICAL test parameters from Part I: 150 operations (50 create, 50 add, 50 get)
+Same test methodology and success criteria
+Save to: dynamodb_test_results.json
+Match JSON format from STEP I for valid comparison
+Your Implementation: HOW you execute this test is your choice
+Test Operations (identical to STEP I):
+
+POST /shopping-carts (create cart) - 50 times
+POST /shopping-carts/{id}/items (add items) - 50 times
+GET /shopping-carts/{id} (retrieve cart) - 50 times
+Output Format (must match MySQL format):
+
+{
+  "operation": "create_cart|add_items|get_cart",
+  "response_time": 42.3,
+  "success": true,
+  "status_code": 201,
+  "timestamp": "2025-01-19T10:00:00Z"
+}
+STEP III: Both mysql_test_results.json and dynamodb_test_results.json files are REQUIRED.
+
+Part 5: Learning Notes
+What Surprised You?
+Document any unexpected discoveries:
+
+Did your partition key strategy work as expected?
+Were there NoSQL concepts that differed from your expectations?
+How did eventual consistency affect your testing?
+Design Evolution
+Note your design iteration process:
+
+What partition key did you try first and why did you change it?
+Did you encounter hot partition issues during testing?
+How did you validate your design choices?
+Assessment Note: Your learning documentation represents part of the assessment - focus on insights gained, not just technical details.
+
+Part 6: CloudWatch Monitoring
+Monitor DynamoDB-specific metrics:
+
+Request latency and consumed capacity
+Throttling events (if any)
+Partition distribution patterns
+Error rates and types
+Deliverables
+Working DynamoDB Implementation:
+Same shopping cart API functionality as STEP I
+DynamoDB tables designed for your access patterns
+Demonstrates NoSQL data modeling decisions
+Performance Testing Results:
+Direct comparison with STEP I MySQL performance
+Evidence of partition strategy working under load
+Eventual consistency behavior documentation
+Implementation Notes (1 page):
+Partition key strategy and rationale
+Key differences from MySQL implementation (STEP I)
+Eventual consistency observations
+NoSQL vs SQL trade-offs discovered

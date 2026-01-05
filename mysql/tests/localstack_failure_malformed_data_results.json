@@ -1,0 +1,35 @@
+[
+  {
+    "test_name": "extra_fields",
+    "description": "Create cart with extra unexpected fields",
+    "request_sent": "{\"another_field\":12345,\"customer_id\":60000,\"unexpected_field\":\"should_be_ignored\"}",
+    "expected_status": 201,
+    "actual_status": 201,
+    "response_time_ms": 6.953,
+    "success": true,
+    "response_body": "{\"shopping_cart_id\":394}",
+    "timestamp": "2025-11-29T14:32:23-08:00"
+  },
+  {
+    "test_name": "large_customer_id",
+    "description": "Create cart with extremely large customer_id",
+    "request_sent": "{\"customer_id\":9999999999}",
+    "expected_status": 201,
+    "actual_status": 500,
+    "response_time_ms": 1.796,
+    "success": false,
+    "response_body": "{\"error\":\"INTERNAL_ERROR\",\"message\":\"Failed to create shopping cart\"}",
+    "timestamp": "2025-11-29T14:32:23-08:00"
+  },
+  {
+    "test_name": "empty_json",
+    "description": "Create cart with empty JSON object",
+    "request_sent": "{}",
+    "expected_status": 400,
+    "actual_status": 400,
+    "response_time_ms": 0.945,
+    "success": true,
+    "response_body": "{\"error\":\"INVALID_INPUT\",\"message\":\"customer_id is required and must be a number\"}",
+    "timestamp": "2025-11-29T14:32:23-08:00"
+  }
+]

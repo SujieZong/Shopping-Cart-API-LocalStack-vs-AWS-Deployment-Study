@@ -1,0 +1,79 @@
+# Project-wide .gitignore for shopping cart API project
+
+# Generated artifacts
+*.pdf                          # Compiled PDF reports
+DEPLOYMENT_ANALYSIS_REPORT.pdf
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+*.sublime-project
+*.sublime-workspace
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Python development
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Node modules (if using Node.js tools)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Temporary and backup files
+*.tmp
+*.bak
+*.swp
+~*
+.#*
+*~
+
+# Analysis and testing
+analysis/charts/
+*.png
+*.jpg
+*.jpeg
+
+# Build outputs
+bin/
+dist/
+build/
+target/
+
+# IDE
+.history/
+.ionide/
+

@@ -1,0 +1,10 @@
+{
+  "consistency_rate": 100,
+  "consistent_reads": 20,
+  "environment": "aws",
+  "failed_reads": 0,
+  "inconsistent_reads": 0,
+  "test_name": "create_then_read",
+  "timestamp": "2025-11-29T15:14:48-08:00",
+  "total_attempts": 20
+}

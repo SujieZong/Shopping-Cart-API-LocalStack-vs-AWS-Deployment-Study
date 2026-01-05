@@ -1,0 +1,74 @@
+# LocalStack data (persistent storage)
+localstack-data/
+
+# Test result directories (large data files)
+flash_sale_results_*/
+
+terraform/*.tfstate
+terraform/*.tfstate.*
+terraform/.terraform/
+terraform/.terraform.lock.hcl
+terraform/tfplan
+terraform/*.tfplan
+
+# Docker volumes and generated data
+*.log
+
+# Deployment configuration (may contain secrets)
+.deployment_config
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Database dumps and backups
+*.sql.gz
+*.sql.bak
+*.dump
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Build artifacts
+dist/
+build/
+bin/
+
+# Node modules (if using Node.js tools)
+node_modules/
+
+# Python virtual environments and cache (for testing scripts)
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Go build artifacts (if testing Go tools)
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+vendor/
+
+# AWS credentials
+.aws/

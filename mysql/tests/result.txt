@@ -1,0 +1,185 @@
+=== Phase 1: Creating 50 shopping carts ===
+[1/150] create_cart - 41.8ms - Status: 201
+[2/150] create_cart - 45.1ms - Status: 201
+[3/150] create_cart - 46.7ms - Status: 201
+[4/150] create_cart - 36.4ms - Status: 201
+[5/150] create_cart - 32.5ms - Status: 201
+[6/150] create_cart - 26.1ms - Status: 201
+[7/150] create_cart - 32.4ms - Status: 201
+[8/150] create_cart - 22.1ms - Status: 201
+[9/150] create_cart - 22.3ms - Status: 201
+[10/150] create_cart - 20.1ms - Status: 201
+[11/150] create_cart - 20.4ms - Status: 201
+[12/150] create_cart - 20.6ms - Status: 201
+[13/150] create_cart - 17.8ms - Status: 201
+[14/150] create_cart - 19.6ms - Status: 201
+[15/150] create_cart - 37.7ms - Status: 201
+[16/150] create_cart - 47.9ms - Status: 201
+[17/150] create_cart - 16.5ms - Status: 201
+[18/150] create_cart - 30.5ms - Status: 201
+[19/150] create_cart - 21.0ms - Status: 201
+[20/150] create_cart - 22.1ms - Status: 201
+[21/150] create_cart - 18.4ms - Status: 201
+[22/150] create_cart - 19.0ms - Status: 201
+[23/150] create_cart - 27.2ms - Status: 201
+[24/150] create_cart - 19.5ms - Status: 201
+[25/150] create_cart - 18.5ms - Status: 201
+[26/150] create_cart - 21.0ms - Status: 201
+[27/150] create_cart - 20.2ms - Status: 201
+[28/150] create_cart - 102.1ms - Status: 201
+[29/150] create_cart - 82.6ms - Status: 201
+[30/150] create_cart - 105.7ms - Status: 201
+[31/150] create_cart - 21.2ms - Status: 201
+[32/150] create_cart - 81.4ms - Status: 201
+[33/150] create_cart - 102.5ms - Status: 201
+[34/150] create_cart - 29.3ms - Status: 201
+[35/150] create_cart - 21.3ms - Status: 201
+[36/150] create_cart - 18.2ms - Status: 201
+[37/150] create_cart - 18.5ms - Status: 201
+[38/150] create_cart - 20.3ms - Status: 201
+[39/150] create_cart - 20.2ms - Status: 201
+[40/150] create_cart - 21.2ms - Status: 201
+[41/150] create_cart - 19.8ms - Status: 201
+[42/150] create_cart - 18.1ms - Status: 201
+[43/150] create_cart - 20.1ms - Status: 201
+[44/150] create_cart - 19.3ms - Status: 201
+[45/150] create_cart - 17.9ms - Status: 201
+[46/150] create_cart - 18.4ms - Status: 201
+[47/150] create_cart - 18.7ms - Status: 201
+[48/150] create_cart - 22.4ms - Status: 201
+[49/150] create_cart - 32.9ms - Status: 201
+[50/150] create_cart - 36.0ms - Status: 201
+Created 50 carts successfully
+
+=== Phase 2: Adding items to 50 carts ===
+[51/150] add_items - 39.5ms - Status: 204
+[52/150] add_items - 28.2ms - Status: 204
+[53/150] add_items - 22.0ms - Status: 204
+[54/150] add_items - 22.0ms - Status: 204
+[55/150] add_items - 22.9ms - Status: 204
+[56/150] add_items - 31.0ms - Status: 204
+[57/150] add_items - 19.7ms - Status: 204
+[58/150] add_items - 28.7ms - Status: 204
+[59/150] add_items - 27.3ms - Status: 204
+[60/150] add_items - 20.0ms - Status: 204
+[61/150] add_items - 24.2ms - Status: 204
+[62/150] add_items - 33.0ms - Status: 204
+[63/150] add_items - 22.0ms - Status: 204
+[64/150] add_items - 20.4ms - Status: 204
+[65/150] add_items - 19.8ms - Status: 204
+[66/150] add_items - 18.9ms - Status: 204
+[67/150] add_items - 22.4ms - Status: 204
+[68/150] add_items - 22.0ms - Status: 204
+[69/150] add_items - 97.6ms - Status: 204
+[70/150] add_items - 109.3ms - Status: 204
+[71/150] add_items - 104.3ms - Status: 204
+[72/150] add_items - 84.6ms - Status: 204
+[73/150] add_items - 20.2ms - Status: 204
+[74/150] add_items - 104.5ms - Status: 204
+[75/150] add_items - 18.9ms - Status: 204
+[76/150] add_items - 23.7ms - Status: 204
+[77/150] add_items - 23.2ms - Status: 204
+[78/150] add_items - 23.5ms - Status: 204
+[79/150] add_items - 26.5ms - Status: 204
+[80/150] add_items - 30.2ms - Status: 204
+[81/150] add_items - 22.0ms - Status: 204
+[82/150] add_items - 20.9ms - Status: 204
+[83/150] add_items - 26.2ms - Status: 204
+[84/150] add_items - 22.9ms - Status: 204
+[85/150] add_items - 24.1ms - Status: 204
+[86/150] add_items - 25.7ms - Status: 204
+[87/150] add_items - 21.3ms - Status: 204
+[88/150] add_items - 28.8ms - Status: 204
+[89/150] add_items - 29.6ms - Status: 204
+[90/150] add_items - 23.6ms - Status: 204
+[91/150] add_items - 21.1ms - Status: 204
+[92/150] add_items - 26.3ms - Status: 204
+[93/150] add_items - 33.4ms - Status: 204
+[94/150] add_items - 22.2ms - Status: 204
+[95/150] add_items - 18.5ms - Status: 204
+[96/150] add_items - 26.3ms - Status: 204
+[97/150] add_items - 30.8ms - Status: 204
+[98/150] add_items - 25.1ms - Status: 204
+[99/150] add_items - 23.4ms - Status: 204
+[100/150] add_items - 34.1ms - Status: 204
+
+=== Phase 3: Retrieving 50 carts ===
+[101/150] get_cart - 18.0ms - Status: 200
+[102/150] get_cart - 16.9ms - Status: 200
+[103/150] get_cart - 20.1ms - Status: 200
+[104/150] get_cart - 19.1ms - Status: 200
+[105/150] get_cart - 24.5ms - Status: 200
+[106/150] get_cart - 31.3ms - Status: 200
+[107/150] get_cart - 136.8ms - Status: 200
+[108/150] get_cart - 144.9ms - Status: 200
+[109/150] get_cart - 146.3ms - Status: 200
+[110/150] get_cart - 133.8ms - Status: 200
+[111/150] get_cart - 127.1ms - Status: 200
+[112/150] get_cart - 62.1ms - Status: 200
+[113/150] get_cart - 84.5ms - Status: 200
+[114/150] get_cart - 59.8ms - Status: 200
+[115/150] get_cart - 82.5ms - Status: 200
+[116/150] get_cart - 71.9ms - Status: 200
+[117/150] get_cart - 55.7ms - Status: 200
+[118/150] get_cart - 41.6ms - Status: 200
+[119/150] get_cart - 30.1ms - Status: 200
+[120/150] get_cart - 40.3ms - Status: 200
+[121/150] get_cart - 43.2ms - Status: 200
+[122/150] get_cart - 38.6ms - Status: 200
+[123/150] get_cart - 47.0ms - Status: 200
+[124/150] get_cart - 44.1ms - Status: 200
+[125/150] get_cart - 46.5ms - Status: 200
+[126/150] get_cart - 46.1ms - Status: 200
+[127/150] get_cart - 42.6ms - Status: 200
+[128/150] get_cart - 53.5ms - Status: 200
+[129/150] get_cart - 34.3ms - Status: 200
+[130/150] get_cart - 48.1ms - Status: 200
+[131/150] get_cart - 42.8ms - Status: 200
+[132/150] get_cart - 52.1ms - Status: 200
+[133/150] get_cart - 64.7ms - Status: 200
+[134/150] get_cart - 44.4ms - Status: 200
+[135/150] get_cart - 62.3ms - Status: 200
+[136/150] get_cart - 40.5ms - Status: 200
+[137/150] get_cart - 59.6ms - Status: 200
+[138/150] get_cart - 48.4ms - Status: 200
+[139/150] get_cart - 62.4ms - Status: 200
+[140/150] get_cart - 40.7ms - Status: 200
+[141/150] get_cart - 52.0ms - Status: 200
+[142/150] get_cart - 133.1ms - Status: 200
+[143/150] get_cart - 138.3ms - Status: 200
+[144/150] get_cart - 124.3ms - Status: 200
+[145/150] get_cart - 109.8ms - Status: 200
+[146/150] get_cart - 121.8ms - Status: 200
+[147/150] get_cart - 40.0ms - Status: 200
+[148/150] get_cart - 45.6ms - Status: 200
+[149/150] get_cart - 58.5ms - Status: 200
+[150/150] get_cart - 47.8ms - Status: 200
+
+=== Test Results ===
+Total Operations: 150
+Successful: 150
+Failed: 0
+Success Rate: 100.00%
+
+create_cart:
+  Count: 50
+  Avg: 31.8ms
+  P50: 21.2ms
+  P95: 82.6ms
+  P99: 102.5ms
+
+add_items:
+  Count: 50
+  Avg: 32.3ms
+  P50: 23.7ms
+  P95: 97.6ms
+  P99: 104.5ms
+
+get_cart:
+  Count: 50
+  Avg: 63.6ms
+  P50: 48.1ms
+  P95: 136.8ms
+  P99: 144.9ms
+
+Total Duration: 2.05 seconds
