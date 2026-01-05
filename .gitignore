@@ -73,6 +73,27 @@ dist/
 build/
 target/
 
+# Terraform
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+*.tfplan
+tfplan
+crash.log
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# LocalStack and Database data
+localstack-data/
+mysql-data/
+dynamodb-data/
+
+# Compiled binaries
+shopping-cart-api
+shopping-cart-api-mysql
+
 # IDE
 .history/
 .ionide/
